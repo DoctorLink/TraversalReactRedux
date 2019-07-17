@@ -10,8 +10,8 @@ const Traversal = ({ traversal, conclusion, match, dispatch }) => {
         dispatch(actions.traversalContinue(id));
         return null;
     }
-
-    if (traversal.questionIds.length === 0) {
+    
+    if (!traversal.questionIds) {
         if (traversal.assessmentType === 1) {
             if (!conclusion || conclusion.traversalId !== id || !conclusion.symptomReport) {
                 dispatch(actions.traversalSymptomReportGet(id));
@@ -33,7 +33,7 @@ const Traversal = ({ traversal, conclusion, match, dispatch }) => {
                 traversal={traversal} 
                 next={traversal => dispatch(actions.traversalNext(traversal))} 
                 previous={(traversalId, algoId, nodeId, assetId) => dispatch(actions.traversalPrevious(traversalId, algoId, nodeId, assetId))} 
-                showSummary={traversalId => dispatch(actions.traversalSummaryGet(traversalId))}
+                setMinHeight={minHeight => dispatch(actions.setChatMinHeight(minHeight))} 
                 showExplanation={explanation => dispatch(actions.populateModal(explanation))}/>)
 }
 

@@ -5,7 +5,7 @@ export const CLOSE_MODAL = 'CLOSE_MODAL'
 export const closeModal = () => ({ type: CLOSE_MODAL })
 
 export const TOGGLE_RADIO = 'TOGGLE_RADIO'
-export const toggleRadio = (id, answerIds) => ({ type: TOGGLE_RADIO, id, answerIds })
+export const toggleRadio = (id, answerIds, checked = undefined) => ({ type: TOGGLE_RADIO, id, answerIds, checked })
 
 export const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX'
 export const toggleCheckbox = (id, answerIds) => ({ type: TOGGLE_CHECKBOX, id, answerIds })
@@ -18,6 +18,9 @@ export const requestTraversal = () => ({ type: REQUEST_TRAVERSAL })
 
 export const SET_TRAVERSAL = 'SET_TRAVERSAL'
 export const setTraversal = traversal => ({ type: SET_TRAVERSAL, traversal, receivedAt: Date.now() })
+
+export const SET_CHAT_MIN_HEIGHT = 'SET_CHAT_MIN_HEIGHT'
+export const setChatMinHeight = minHeight => ({ type: SET_CHAT_MIN_HEIGHT, minHeight })
 
 export const NEXT_TRAVERSAL_QUESTION = 'NEXT_TRAVERSAL_QUESTION'
 export const nextTraversalQuestion = traversal => ({ type: NEXT_TRAVERSAL_QUESTION, traversal, receivedAt: Date.now() })

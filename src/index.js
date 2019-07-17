@@ -50,6 +50,9 @@ export { default as SymptomReportBodyText } from './Components/SymptomReportBody
 export { default as SymptomReportConclusionTitle } from './Components/SymptomReportConclusionTitle'
 export { default as SymptomReportSVG } from './Components/SymptomReportSVG'
 
+
+export { default as Step } from './Components/Step'
+
 export { default as SymptomReport } from './ComponentModules/SymptomReport'
 export { default as Traversal }  from './ComponentModules/Traversal'
 export { default as TraversalForm }  from './ComponentModules/TraversalForm'
@@ -83,6 +86,7 @@ export { default as modalReducer } from './Reducers/Modal'
 export { createTraversalSaga, createChatSaga } from './Sagas'
 
 export { default as createAutoForwardGenerator } from './Sagas/Generators/AutoForward'
+export { default as createAutoForwardChatGenerator } from './Sagas/Generators/AutoForwardChat'
 export { default as createConclusionsGenerator } from './Sagas/Generators/Conclusions'
 export { default as createContinueGenerator } from './Sagas/Generators/Continue'
 export { default as createContinueChatGenerator } from './Sagas/Generators/ContinueChat'
