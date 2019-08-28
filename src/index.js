@@ -1,3 +1,5 @@
+// TODO Discuss with Ben whether we need/ought be exporting all of this.
+
 import * as actions from './Actions'
 import * as helpers from './Helpers'
 
@@ -39,17 +41,18 @@ export { default as TableQuestionRow } from './Components/TableQuestionRow'
 export { default as TextField } from './Components/TextField'
 export { default as Title } from './Components/Title'
 
-export { default as SymptomReportPanelBlocks } from './Components/SymptomReportPanelBlocks'
-export { default as SymptomReportPanelContainer } from './Components/SymptomReportPanelContainer'
-export { default as SymptomReportPanel } from './Components/SymptomReportPanel'
-export { default as SymptomReportPanelHeader } from './Components/SymptomReportPanelHeader'
-export { default as SymptomReportPanelTitle } from './Components/SymptomReportPanelTitle'
-export { default as SymptomReportPanelContent } from './Components/SymptomReportPanelContent'
-export { default as SymptomReportPanelConclusion } from './Components/SymptomReportPanelConclusion'
-export { default as SymptomReportBodyText } from './Components/SymptomReportBodyText'
-export { default as SymptomReportConclusionTitle } from './Components/SymptomReportConclusionTitle'
-export { default as SymptomReportSVG } from './Components/SymptomReportSVG'
-
+export {
+    PanelBlocks,
+    PanelContainer,
+    Panel,
+    PanelHeader,
+    PanelTitle,
+    PanelContent,
+    PanelConclusion,
+    PanelBodyText,
+    PanelConclusionTitle,
+    PanelSVG
+} from './Components';
 
 export { default as Loader } from './Components/Loader'
 export { default as Step } from './Components/Step'

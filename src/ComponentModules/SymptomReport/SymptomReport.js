@@ -1,17 +1,19 @@
 import React from 'react'
 import { PoseGroup } from 'react-pose'
 import colors from '../../Theme/base/colors'
-import InfoIcon from '../../Components/InfoIcon'
-import PanelBlocks from '../../Components/SymptomReportPanelBlocks'
-import PanelContainer from '../../Components/SymptomReportPanelContainer'
-import Panel from '../../Components/SymptomReportPanel'
-import PanelHeader from '../../Components/SymptomReportPanelHeader'
-import PanelTitle from '../../Components/SymptomReportPanelTitle'
-import PanelContent from '../../Components/SymptomReportPanelContent'
-import PanelConclusion from '../../Components/SymptomReportPanelConclusion'
-import BodyText from '../../Components/SymptomReportBodyText'
-import ConclusionTitle from '../../Components/SymptomReportConclusionTitle'
-import SVG from '../../Components/SymptomReportSVG'
+import {
+    InfoIcon,
+    PanelBlocks,
+    PanelContainer,
+    Panel,
+    PanelHeader,
+    PanelTitle,
+    PanelContent,
+    PanelConclusion,
+    PanelBodyText as BodyText,
+    PanelConclusionTitle as ConclusionTitle,
+    PanelSVG as SVG
+} from '../../Components'
 
 const Icon = ({ state }) => {
     if (state === 1) return (<SVG width="24" height="24" viewBox="0 0 24 24">

@@ -26,16 +26,16 @@ export { default as Title } from './Title'
 
 
 
-export { default as SymptomReportPanelBlocks } from './SymptomReportPanelBlocks'
-export { default as SymptomReportPanelContainer } from './SymptomReportPanelContainer'
-export { default as SymptomReportPanel } from './SymptomReportPanel'
-export { default as SymptomReportPanelHeader } from './SymptomReportPanelHeader'
-export { default as SymptomReportPanelTitle } from './SymptomReportPanelTitle'
-export { default as SymptomReportPanelContent } from './SymptomReportPanelContent'
-export { default as SymptomReportPanelConclusion } from './SymptomReportPanelConclusion'
-export { default as SymptomReportBodyText } from './SymptomReportBodyText'
-export { default as SymptomReportConclusionTitle } from './SymptomReportConclusionTitle'
-export { default as SymptomReportSVG } from './SymptomReportSVG'
+export { default as PanelBlocks } from './PanelBlocks'
+export { default as PanelContainer } from './PanelContainer'
+export { default as Panel } from './Panel'
+export { default as PanelHeader } from './PanelHeader'
+export { default as PanelTitle } from './PanelTitle'
+export { default as PanelContent } from './PanelContent'
+export { default as PanelConclusion } from './PanelConclusion'
+export { default as PanelBodyText } from './PanelBodyText'
+export { default as PanelConclusionTitle } from './PanelConclusionTitle'
+export { default as PanelSVG } from './PanelSVG'
 
 
 export { default as Loader } from './Loader'
