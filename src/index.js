@@ -8,12 +8,14 @@ export { createTraversalWebApi, createChatWebApi }  from './WebApi'
 export { actions }
 export { helpers }
 
-export { default as createTraversalStore }  from './Helpers/createTraversalStore'
-export { default as createChatStore }  from './Helpers/createChatStore'
-export { default as createTraversalResponse }  from './Helpers/createTraversalResponse'
-export { default as createChatResponse }  from './Helpers/createChatResponse'
-export { default as flattenTraversalNodeCollection }  from './Helpers/flattenTraversalNodeCollection'
-export { default as flattenTraversalChat }  from './Helpers/flattenTraversalChat'
+export {
+    createTraversalStore,
+    createChatStore,
+    createTraversalResponse,
+    createChatResponse,
+    flattenTraversalNodeCollection,
+    flattenTraversalChat,
+} from "./Helpers";
 
 export { default as AlgoName }  from './Components/AlgoName'
 export { default as Answer }  from './Components/Answer'
