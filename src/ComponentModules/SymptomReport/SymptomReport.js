@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { connect } from "react-redux";
 import { PoseGroup } from 'react-pose'
+import * as actions from '../../Actions'
 import colors from '../../Theme/base/colors'
 import {
     InfoIcon,
@@ -35,8 +37,15 @@ const Icon = ({ state }) => {
 }
 
 
-export default ({ conclusion, showExplanation }) => {
-    const { symptomReport } = conclusion;
+const SymptomReport = ({ traversalId, symptomReport, dispatch }) => {
+    useEffect(() => { dispatch(actions.traversalSymptomReportGet(traversalId)) }, [traversalId]);
+
+    if (!symptomReport) {
+        return null;
+    }
+
+    const showExplanation = explanation => dispatch(actions.populateModal(explanation));
+
     const level = () => {
         switch (symptomReport.messageLevel) {
             case 3:
@@ -47,6 +56,7 @@ export default ({ conclusion, showExplanation }) => {
                 return colors.danger
         }
     }
+
     return (<PoseGroup animateOnMount={true}>
         <Panel fullWidth={true} key="header">
             <PanelHeader color={level()}>
@@ -125,3 +135,6 @@ export default ({ conclusion, showExplanation }) => {
         </PanelBlocks>
     </PoseGroup>)
 }
+
+const mapStateToProps = state => ({ symptomReport: state.conclusion && state.conclusion.symptomReport });
+export default connect(mapStateToProps)(SymptomReport);
