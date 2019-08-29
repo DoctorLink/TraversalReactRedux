@@ -62,7 +62,7 @@ export const TRAVERSAL_CONCLUSION_SET = 'TRAVERSAL_CONCLUSION_SET'
 export const traversalConclusionSet = conclusion => ({ type: TRAVERSAL_CONCLUSION_SET, conclusion, receivedAt: Date.now() })
 
 export const HEALTH_RISKS_GET = 'HEALTH_RISKS_GET'
-export const healthRisksGet = (traversalId, timescales) => ({ type: HEALTH_RISKS_GET, traversalId, timescales })
+export const healthRisksGet = (traversalId, ages) => ({ type: HEALTH_RISKS_GET, traversalId, ages })
 
 export const HEALTH_RISKS_SET = 'HEALTH_RISKS_SET'
 export const healthRisksSet = healthRisks => ({ type: HEALTH_RISKS_SET, healthRisks })
