@@ -23,6 +23,7 @@ export { default as TableQuestion } from './TableQuestion'
 export { default as TableQuestionRow } from './TableQuestionRow'
 export { default as TextField } from './TextField'
 export { default as Title } from './Title'
+export { Dropdown, InlineDropdown } from './Dropdown'
 
 
 
