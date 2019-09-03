@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from "styled-components";
-import { ChartContext } from "./ChartContext";
+import { barLabelWidth, barWidth, barHeight, barInterval, reducedRiskColor, reduceableRiskColor } from "./chartSettings";
 
 const StyledRect = styled.rect`
     transition: width 0.5s, x 0.5s
 `
 
 const RiskBar = ({ risk, y }) => {
-    const { barLabelWidth, barWidth, barHeight, reducedRiskColor, reduceableRiskColor } = useContext(ChartContext);
     if (isNaN(+risk.current)) {
         return null;
     }
@@ -26,7 +25,6 @@ const RiskBar = ({ risk, y }) => {
 }
 
 const LabelledRiskBar = ({ risk, index }) => {
-    const { barInterval, barHeight } = useContext(ChartContext);
     const padding = (barInterval - barHeight) / 2;
     const y = index * barInterval + padding;
     return (

@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
-import { ChartContext } from "./ChartContext";
+import React from 'react';
+import { barHeight as boxSize, barInterval, reducedRiskColor, reduceableRiskColor } from "./chartSettings";
 
-const KeyItem = ({x, y, fill, label}) => {
-    const boxSize = useContext(ChartContext).barHeight;
+const KeyItem = ({ x, y, fill, label }) => {
     const textX = boxSize + 10;
     const textY = boxSize / 2 + 5;
     return (
@@ -13,12 +12,9 @@ const KeyItem = ({x, y, fill, label}) => {
     );
 }
 
-export const ChartKey = ({x, y}) => {
-    const { barInterval, reducedRiskColor, reduceableRiskColor } = useContext(ChartContext);
-    return (
-        <svg x={x} y={y}>
-            <KeyItem x={0} y={0} fill={reducedRiskColor} label="Risks you can't change" />
-            <KeyItem x={0} y={barInterval} fill={reduceableRiskColor} label="Risks you can change" />
-        </svg>
-    );
-}
+export const ChartKey = ({ x, y }) => (
+    <svg x={x} y={y}>
+        <KeyItem x={0} y={0} fill={reducedRiskColor} label="Risks you can't change" />
+        <KeyItem x={0} y={barInterval} fill={reduceableRiskColor} label="Risks you can change" />
+    </svg>
+);

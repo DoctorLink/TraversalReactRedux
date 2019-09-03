@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import { RiskBars } from "./RiskBars";
-import { ChartContext, chartSettings } from "./ChartContext";
+import { barInterval, gridlineLabelHeight, barLabelWidth, barWidth } from "./chartSettings";
 import { ChartKey } from "./ChartKey";
 import { GridLines } from "./GridLines";
 
@@ -12,11 +12,10 @@ const StyledSvg = styled.svg`
 `
 
 const RiskChart = ({ risks }) => {
-    const { barInterval, gridlineLabelHeight, barLabelWidth, barWidth } = useContext(ChartContext);
     const chartHeight = risks.length * barInterval;
     const keyHeight = barInterval * 2;
     const keyTop = gridlineLabelHeight + chartHeight + 20;
-    const svgHeight = keyTop + keyHeight;
+    const svgHeight = keyTop + keyHeight - 10;
     return (
         <StyledSvg height={svgHeight}>
             <title>Your health risks</title>
@@ -27,12 +26,4 @@ const RiskChart = ({ risks }) => {
     )
 }
 
-export default ({ risks }) => {
-    // Using the context API allows us to change settings dynamically if required (e.g. responding to screen width).
-    // We're not actually doing so as yet.
-    return (
-        <ChartContext.Provider value={chartSettings}>
-            <RiskChart risks={risks} />
-        </ChartContext.Provider>
-    )
-};
+export default RiskChart;

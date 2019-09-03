@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import colors from '../../Theme/base/colors';
-import { ChartContext } from "./ChartContext";
+import { gridlineLabelHeight } from "./chartSettings";
 
 const GridLine = ({ percent, length }) => {
-    const { gridlineLabelHeight } = useContext(ChartContext);
     return (
         <svg x={`${percent}%`} overflow="visible">
             <text x={5} y={gridlineLabelHeight / 2} textAnchor="middle">{percent}%</text>
