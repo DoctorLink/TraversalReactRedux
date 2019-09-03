@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PanelHeader, PanelContent, PanelTitle, InlineDropdown } from '../../Components';
+import { PanelHeader, PanelContent, PanelTitle, InlineDropdown, RiskChart } from '../../Components';
 import colors from '../../Theme/base/colors';
 
 export const AgeOptions = [50, 60, 70, 80, 90, 100, 110];
@@ -21,13 +21,7 @@ const RiskScores = ({ riskSummary }) => {
                 </PanelTitle>
             </PanelHeader>
             <PanelContent>
-                <ul>
-                    {selectedRisks.map(risk =>
-                        <li key={`${risk.name}-${risk.time}`}>
-                            {risk.name}: Current {risk.current}, Reduced {risk.reduced}
-                        </li>
-                    )}
-                </ul>
+                <RiskChart risks={selectedRisks} />
             </PanelContent>
         </>
     )

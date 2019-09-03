@@ -51,3 +51,5 @@ export { default as ChatTextField } from './ChatTextField'
 export { default as ChoiceContainer } from './ChoiceContainer'
 export { default as PrimaryChoice } from './PrimaryChoice'
 export { default as SecondaryChoice } from './SecondaryChoice'
+
+export { RiskChart } from './RiskChart'

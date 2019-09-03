@@ -21,7 +21,6 @@ describe("RiskScores component", () => {
     beforeEach(() => result = render(<RiskScores riskSummary={riskSummary} />));
 
     const getDropdown = () => result.getByText(/Your risks before the age of/).getElementsByTagName("select")[0];
-    const getRiskItems = () => result.getAllByRole("listitem");
 
     test("shows the age options that greater than the user's age", () => {
         const options = getDropdown().getElementsByTagName("option");
@@ -33,18 +32,18 @@ describe("RiskScores component", () => {
     })
 
     test("shows risks for the selected age", () => {
-        const riskItems = getRiskItems();
-        expect(riskItems).toHaveLength(2);
-        expect(riskItems[0]).toHaveTextContent("Heart Disease: Current 0.4, Reduced 0.3");
-        expect(riskItems[1]).toHaveTextContent("Lung Cancer: Current 0.4, Reduced 0.3");
+        expect(result.getByText("Heart Disease").parentElement)
+            .toHaveTextContent("Current: 0.4%, reduced: 0.3%");
+        expect(result.getByText("Lung Cancer").parentElement)
+            .toHaveTextContent("Current: 0.4%, reduced: 0.3%");
     })
 
     test("changing the selected age updates the risks", () => {
         fireEvent.change(getDropdown(), { target: { value: "70" } });
 
-        const riskItems = getRiskItems();
-        expect(riskItems).toHaveLength(2);
-        expect(riskItems[0]).toHaveTextContent("Heart Disease: Current 0.2, Reduced 0.1");
-        expect(riskItems[1]).toHaveTextContent("Lung Cancer: Current 0.2, Reduced 0.1");
+        expect(result.getByText("Heart Disease").parentElement)
+            .toHaveTextContent("Current: 0.2%, reduced: 0.1%");
+        expect(result.getByText("Lung Cancer").parentElement)
+            .toHaveTextContent("Current: 0.2%, reduced: 0.1%");
     })
 });
