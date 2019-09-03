@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import styled from "styled-components";
-import { LabelledRiskBar } from "./RiskBar";
+import { RiskBars } from "./RiskBars";
 import { ChartContext, chartSettings } from "./ChartContext";
 import { ChartKey } from "./ChartKey";
-import { GridLine } from "./GridLine";
+import { GridLines } from "./GridLines";
 
-const SVG = styled.svg`
+const StyledSvg = styled.svg`
     font-size: 0.8rem;
 `
 
@@ -17,12 +17,12 @@ const RiskChart = ({ risks }) => {
     const svgHeight = keyTop + keyHeight;
     const svgWidth = barLabelWidth + barWidth + 20;
     return (
-        <SVG width={svgWidth} height={svgHeight} ariaLabelledby="title">
-            <title id="title">Your health risks</title>
-            {[0, 25, 50, 75, 100].map(pc => <GridLine key={pc} percent={pc} length={chartHeight} />)}
-            {risks.map((risk, i) => <LabelledRiskBar key={risk.name} risk={risk} index={i} />)}
-            <ChartKey y={keyTop} />
-        </SVG>
+        <StyledSvg width={svgWidth} height={svgHeight}>
+            <title>Your health risks</title>
+            <GridLines x={barLabelWidth} y={0} lineLength={chartHeight} />
+            <RiskBars risks={risks} x={0} y={gridlineLabelHeight} />
+            <ChartKey x={0} y={keyTop} />
+        </StyledSvg>
     )
 }
 
