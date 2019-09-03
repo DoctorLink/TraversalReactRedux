@@ -22,7 +22,7 @@ describe("RiskScores component", () => {
 
     const getDropdown = () => result.getByText(/Your risks before the age of/).getElementsByTagName("select")[0];
 
-    test("shows the age options that greater than the user's age", () => {
+    test("shows the age options that are greater than the user's age", () => {
         const options = getDropdown().getElementsByTagName("option");
         expect(Array.from(options).map(opt => opt.value)).toEqual(["70", "80", "90", "100", "110"]);
     })

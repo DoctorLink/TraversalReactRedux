@@ -12,8 +12,6 @@ const GridLine = ({ percent, length }) => {
 }
 
 const intervals = [0, 25, 50, 75, 100];
-// const intervals = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-// const intervals = [0, 20, 40, 60, 80, 100];
 
 const GridLines = ({x, y, width, lineLength}) => {
     return (

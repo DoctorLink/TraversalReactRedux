@@ -7,7 +7,7 @@ const StyledRect = styled.rect`
 `
 
 const RiskBar = ({ risk, y }) => {
-    if (isNaN(+risk.current)) {
+    if (isNaN(risk.current)) {
         return null;
     }
     const { reduced, current } = risk;
@@ -29,7 +29,7 @@ const LabelledRiskBar = ({ risk, index }) => {
     const y = index * barInterval + padding;
     return (
         <g>
-            <text width="30%" x={0} y={y + barHeight / 2 + 5}>{risk.name}</text>
+            <text x={0} y={y + barHeight / 2 + 5}>{risk.name}</text>
             <RiskBar risk={risk} y={y} />
         </g>
     )
