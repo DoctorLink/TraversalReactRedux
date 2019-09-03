@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from "react-redux";
 import RiskScores, { AgeOptions } from './RiskScores';
 import { PoseGroup } from 'react-pose';
-import { Panel } from '../../Components';
+import { Panel, PanelContainer } from '../../Components';
 import { healthRisksGet } from '../../Actions';
 
 const HealthAssessment = ({ traversalId, healthAssessment, dispatch }) => {
@@ -11,9 +11,11 @@ const HealthAssessment = ({ traversalId, healthAssessment, dispatch }) => {
         <div>
             <h2>Global Health Check Scores</h2>
             <PoseGroup animateOnMount={true}>
-                <Panel key="risk">
-                    <RiskScores riskSummary={healthAssessment.risks} />
-                </Panel>
+                <PanelContainer key="risk">
+                    <Panel>
+                        <RiskScores riskSummary={healthAssessment.risks} />
+                    </Panel>
+                </PanelContainer>
             </PoseGroup>
         </div>
     )

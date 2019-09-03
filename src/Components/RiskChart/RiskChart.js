@@ -6,20 +6,21 @@ import { ChartKey } from "./ChartKey";
 import { GridLines } from "./GridLines";
 
 const StyledSvg = styled.svg`
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+    overflow: visible;
+    width: 100%;
 `
 
 const RiskChart = ({ risks }) => {
     const { barInterval, gridlineLabelHeight, barLabelWidth, barWidth } = useContext(ChartContext);
     const chartHeight = risks.length * barInterval;
-    const keyHeight = barInterval;
+    const keyHeight = barInterval * 2;
     const keyTop = gridlineLabelHeight + chartHeight + 20;
     const svgHeight = keyTop + keyHeight;
-    const svgWidth = barLabelWidth + barWidth + 20;
     return (
-        <StyledSvg width={svgWidth} height={svgHeight}>
+        <StyledSvg height={svgHeight}>
             <title>Your health risks</title>
-            <GridLines x={barLabelWidth} y={0} lineLength={chartHeight} />
+            <GridLines x={barLabelWidth} y={0} width={barWidth} lineLength={chartHeight} />
             <RiskBars risks={risks} x={0} y={gridlineLabelHeight} />
             <ChartKey x={0} y={keyTop} />
         </StyledSvg>

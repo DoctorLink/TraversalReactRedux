@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { ChartContext } from "./ChartContext";
 
-const KeyItem = ({x, fill, label}) => {
+const KeyItem = ({x, y, fill, label}) => {
     const boxSize = useContext(ChartContext).barHeight;
     const textX = boxSize + 10;
     const textY = boxSize / 2 + 5;
     return (
-        <svg x={x}>
+        <svg x={x} y={y}>
             <rect width={boxSize} height={boxSize} fill={fill} />
             <text x={textX} y={textY}>{label}</text>
         </svg>
@@ -14,11 +14,11 @@ const KeyItem = ({x, fill, label}) => {
 }
 
 export const ChartKey = ({x, y}) => {
-    const { reducedRiskColor, reduceableRiskColor } = useContext(ChartContext);
+    const { barInterval, reducedRiskColor, reduceableRiskColor } = useContext(ChartContext);
     return (
         <svg x={x} y={y}>
-            <KeyItem x={0} fill={reducedRiskColor} label="Risks you can't change" />
-            <KeyItem x={220} fill={reduceableRiskColor} label="Risks you can change" />
+            <KeyItem x={0} y={0} fill={reducedRiskColor} label="Risks you can't change" />
+            <KeyItem x={0} y={barInterval} fill={reduceableRiskColor} label="Risks you can change" />
         </svg>
     );
 }
