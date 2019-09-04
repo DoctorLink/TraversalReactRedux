@@ -1,5 +1,5 @@
 import React from 'react';
-import { barHeight as boxSize, barInterval, reducedRiskColor, reduceableRiskColor } from "./chartSettings";
+import { barHeight as boxSize, barInterval, minimumRiskColor, changeableRiskColor } from "./chartSettings";
 
 const KeyItem = ({ x, y, fill, label }) => {
     const textX = boxSize + 10;
@@ -14,7 +14,7 @@ const KeyItem = ({ x, y, fill, label }) => {
 
 export const ChartKey = ({ x, y }) => (
     <svg x={x} y={y}>
-        <KeyItem x={0} y={0} fill={reducedRiskColor} label="Risks you can't change" />
-        <KeyItem x={0} y={barInterval} fill={reduceableRiskColor} label="Risks you can change" />
+        <KeyItem x={0} y={0} fill={minimumRiskColor} label="Risks you can't change" />
+        <KeyItem x={0} y={barInterval} fill={changeableRiskColor} label="Risks you can change" />
     </svg>
 );

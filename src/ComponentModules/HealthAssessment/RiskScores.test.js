@@ -8,12 +8,12 @@ describe("RiskScores component", () => {
     const riskSummary = {
         age: 67,
         risks: [
-            { time: 3, name: "Heart Disease", current: 0.2, reduced: 0.1 },
-            { time: 13, name: "Heart Disease", current: 0.3, reduced: 0.2 },
-            { time: 23, name: "Heart Disease", current: 0.4, reduced: 0.3 },
-            { time: 3, name: "Lung Cancer", current: 0.2, reduced: 0.1 },
-            { time: 13, name: "Lung Cancer", current: 0.3, reduced: 0.2 },
-            { time: 23, name: "Lung Cancer", current: 0.4, reduced: 0.3 },
+            { time: 3, name: "Heart Disease", current: 0.2, minimum: 0.1 },
+            { time: 13, name: "Heart Disease", current: 0.3, minimum: 0.2 },
+            { time: 23, name: "Heart Disease", current: 0.4, minimum: 0.3 },
+            { time: 3, name: "Lung Cancer", current: 0.2, minimum: 0.1 },
+            { time: 13, name: "Lung Cancer", current: 0.3, minimum: 0.2 },
+            { time: 23, name: "Lung Cancer", current: 0.4, minimum: 0.3 },
         ]
     };
 
@@ -33,17 +33,17 @@ describe("RiskScores component", () => {
 
     test("shows risks for the selected age", () => {
         expect(result.getByText("Heart Disease").parentElement)
-            .toHaveTextContent("Current: 0.4%, reduced: 0.3%");
+            .toHaveTextContent("Current: 0.4%, minimum: 0.3%");
         expect(result.getByText("Lung Cancer").parentElement)
-            .toHaveTextContent("Current: 0.4%, reduced: 0.3%");
+            .toHaveTextContent("Current: 0.4%, minimum: 0.3%");
     })
 
     test("changing the selected age updates the risks", () => {
         fireEvent.change(getDropdown(), { target: { value: "70" } });
 
         expect(result.getByText("Heart Disease").parentElement)
-            .toHaveTextContent("Current: 0.2%, reduced: 0.1%");
+            .toHaveTextContent("Current: 0.2%, minimum: 0.1%");
         expect(result.getByText("Lung Cancer").parentElement)
-            .toHaveTextContent("Current: 0.2%, reduced: 0.1%");
+            .toHaveTextContent("Current: 0.2%, minimum: 0.1%");
     })
 });
