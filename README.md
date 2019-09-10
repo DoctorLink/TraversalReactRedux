@@ -27,7 +27,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createTraversalStore, TraversalApp } from '@doctorlink/traversal-react-redux';
 
-const store = createTraversalStore('www.exmaple.com/api')
+const store = createTraversalStore({
+  traversalApi: 'https://api-traversal.doctorlink.engineering',
+  hraApi: 'https://api-hra.doctorlink.engineering'
+})
 
 render(<TraversalApp store={store} />, document.getElementById('root'));
 ```
