@@ -18,8 +18,7 @@ const RiskBar = ({ risk, y }) => {
         <svg x={barLabelWidth} y={y} width={barWidth}>
             <title>Current: {current}%, minimum: {minimum}%</title>
             <StyledRect fill={minimumRiskColor} width={minimumWidth} height={barHeight} x={0} />
-            {changeable > 0 &&
-                <StyledRect fill={changeableRiskColor} width={changeableWidth} height={barHeight} x={minimumWidth} />}
+            <StyledRect fill={changeableRiskColor} width={changeableWidth} height={barHeight} x={minimumWidth} />
         </svg>
     )
 }
