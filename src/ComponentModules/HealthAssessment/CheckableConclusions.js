@@ -31,7 +31,6 @@ const CheckableConclusions = ({ riskSummary, conclusions, onChange, showExplanat
         return null;
     }
 
-    console.log(conclusions);
     const modifiableRiskNames = riskSummary.modifiableRisks.map(risk => risk.factor);
     const checkableConclusions = conclusions.filter(isCheckable).filter(c => modifiableRiskNames.indexOf(c.subCategory) > -1);
 
