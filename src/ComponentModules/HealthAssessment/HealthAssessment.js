@@ -30,7 +30,7 @@ const HealthAssessment = ({ traversalId, healthAssessment, conclusions, dispatch
                 </PanelContainer>
                 <PanelContainer key="conclusions">
                     <Panel>
-                        <CheckableConclusions conclusions={conclusions} conclusionIds={conclusionIds} onChange={onConclusionsChanged} showExplanation={showExplanation} />
+                        <CheckableConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} showExplanation={showExplanation} />
                     </Panel>
                 </PanelContainer>
             </PoseGroup>

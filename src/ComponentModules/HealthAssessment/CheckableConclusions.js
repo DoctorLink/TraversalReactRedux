@@ -11,7 +11,7 @@ const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation })
     </Answer>
 )
 
-const CheckableConclusions = ({ conclusionIds, conclusions, onChange, showExplanation }) => {
+const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, showExplanation }) => {
     const [selectedIds, setSelectedIds] = useState([]);
 
     const onCheckboxChange = (assetId, checked) => {
@@ -22,11 +22,11 @@ const CheckableConclusions = ({ conclusionIds, conclusions, onChange, showExplan
         onChange(newSelectedIds);
     }
 
-    if (!conclusions || conclusions.length === 0) {
+    const conclusionsToDisplay = conclusions.filter(c => !c.silent && checkableConclusions.indexOf(c.assetId) > -1);
+
+    if (conclusionsToDisplay.length === 0) {
         return null;
     }
-
-    const checkableConclusions = conclusions.filter(c => !c.silent && conclusionIds.riskConclusions.indexOf(c.assetId) > -1);
 
     return (
         <>
@@ -34,7 +34,7 @@ const CheckableConclusions = ({ conclusionIds, conclusions, onChange, showExplan
                 <PanelBodyText bold>See the impact of making the following changes to your lifestyle</PanelBodyText>
             </PanelHeader>
             <PanelContent>
-                {checkableConclusions.map(conc => (
+                {conclusionsToDisplay.map(conc => (
                     <PanelConclusion key={conc.assetId}>
                         <CheckableConclusion
                             conclusion={conc}
