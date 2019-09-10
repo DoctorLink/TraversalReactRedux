@@ -7,7 +7,7 @@ export default (api) => function* healthRisks(action) {
         return;
     }
     try {
-        const healthRisks = yield call(api.healthRisks, action.traversalId, action.ages);
+        const healthRisks = yield call(api.healthRisks, action.traversalId, action.ages, action.conclusions);
         yield put(actions.healthRisksSet(healthRisks));
     } catch (error) {
         console.log("healthRisks error")

@@ -81,8 +81,10 @@ const fetchTraversalSymptomReport = (api) => traversalId =>
     fetch(`${api}/Traversal/SymptomReportAsync/${traversalId}`)
         .then(response => response.json())
 
-const fetchHealthRisks = (api) => (traversalId, ages) => {
-    const qs = ages.map(age => `ages=${age}`).join('&');
+const fetchHealthRisks = (api) => (traversalId, ages, conclusions) => {
+    const qs = ages.map(age => `ages=${age}`)
+                .concat(conclusions.map(conc => `conclusions=${conc}`))
+                .join('&');
     return fetch(`${api}/HealthRisk/${traversalId}?${qs}`)
         .then(response => response.json());
 }

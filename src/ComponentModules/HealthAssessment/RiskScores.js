@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PanelHeader, PanelContent, PanelTitle, InlineDropdown, RiskChart } from '../../Components';
+import { PanelHeader, PanelContent, PanelBodyText, InlineDropdown, RiskChart } from '../../Components';
 import colors from '../../Theme/base/colors';
 
 export const AgeOptions = [50, 60, 70, 80, 90, 100, 110];
@@ -15,10 +15,10 @@ const RiskScores = ({ riskSummary }) => {
     const onDropdownChange = e => setSelectedAge(e.target.value);
     return (
         <>
-            <PanelHeader color={colors.brand100}>
-                <PanelTitle>
+            <PanelHeader color={colors.grey200}>
+                <PanelBodyText bold>
                     Your risks before the age of <InlineDropdown options={visibleAgeOptions} value={selectedAge} onChange={onDropdownChange} />
-                </PanelTitle>
+                </PanelBodyText>
             </PanelHeader>
             <PanelContent>
                 <RiskChart risks={selectedRisks} />
