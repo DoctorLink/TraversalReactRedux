@@ -2,11 +2,6 @@ import React, { useState } from "react";
 import { PanelHeader, PanelContent, PanelConclusion, PanelBodyText, Checkbox, Label, InfoIcon, Answer } from "../../Components";
 import colors from '../../Theme/base/colors';
 
-const isCheckable = (conclusion) =>
-    !conclusion.silent
-    && conclusion.category1 === "Learning module"
-    && conclusion.category2 !== "Not Applicable"
-
 const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation }) => (
     <Answer>
         <Label answer={conclusion}>
@@ -16,7 +11,7 @@ const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation })
     </Answer>
 )
 
-const CheckableConclusions = ({ riskSummary, conclusions, onChange, showExplanation }) => {
+const CheckableConclusions = ({ conclusionIds, conclusions, onChange, showExplanation }) => {
     const [selectedIds, setSelectedIds] = useState([]);
 
     const onCheckboxChange = (assetId, checked) => {
@@ -31,8 +26,7 @@ const CheckableConclusions = ({ riskSummary, conclusions, onChange, showExplanat
         return null;
     }
 
-    const modifiableRiskNames = riskSummary.modifiableRisks.map(risk => risk.factor);
-    const checkableConclusions = conclusions.filter(isCheckable).filter(c => modifiableRiskNames.indexOf(c.subCategory) > -1);
+    const checkableConclusions = conclusions.filter(c => !c.silent && conclusionIds.riskConclusions.indexOf(c.assetId) > -1);
 
     return (
         <>

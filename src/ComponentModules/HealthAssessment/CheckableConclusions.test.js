@@ -13,17 +13,21 @@ describe("CheckableConclusions component", () => {
         ]
     };
     const conclusions = [
-        { assetId: 1000, category1: "Learning module", category2: "1", subCategory: "BP", displayText: "Lower BP to less than 140/90", explanation: "" },
-        { assetId: 1001, category1: "Learning module", category2: "1", subCategory: "Diet", displayText: "Eat more healthily", explanation: "" },
-        { assetId: 1002, category1: "Learning module", category2: "Not Applicable", subCategory: "Diet", displayText: "Your Mediterranean Diet Rating is 50 out of 100", explanation: "" },
-        { assetId: 1003, category1: "Learning module", category2: "1", subCategory: "Tobacco", displayText: "Stop smoking", explanation: "" },
-        { assetId: 1004, category1: "Learning module", category2: "2", subCategory: "Diet", silent: true, displayText: "Eat more vegetables", explanation: "" },
+        { assetId: 1000, displayText: "Lower BP to less than 140/90", explanation: "" },
+        { assetId: 1001, displayText: "Eat more healthily", explanation: "" },
+        { assetId: 1002, displayText: "Your Mediterranean Diet Rating is 50 out of 100", explanation: "" },
+        { assetId: 1003, displayText: "Stop smoking", explanation: "" },
+        { assetId: 1004, displayText: "Eat more vegetables", silent: true, explanation: "" },
     ]
+
+    const conclusionIds = {
+        riskConclusions: [ 1001, 1003, 1004, 1005, 1234 ]
+    };
 
     const onChange = jest.fn();
 
     let result;
-    beforeEach(() => result = render(<CheckableConclusions riskSummary={riskSummary} conclusions={conclusions} onChange={onChange} />));
+    beforeEach(() => result = render(<CheckableConclusions conclusions={conclusions} conclusionIds={conclusionIds} onChange={onChange} />));
 
     const queryCheckboxByConclusionId = (assetId) => result.queryByLabelText(conclusions.find(c => c.assetId == assetId).displayText);
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { PoseGroup } from 'react-pose';
 import { connect } from "react-redux";
-import { healthRisksGet, traversalConclusionGet, populateModal } from '../../Actions';
+import { healthRisksGet, traversalConclusionGet, hraConclusionsGet, populateModal } from '../../Actions';
 import { Panel, PanelContainer } from '../../Components';
 import CheckableConclusions from './CheckableConclusions';
 import RiskScores, { AgeOptions } from './RiskScores';
@@ -12,11 +12,12 @@ const HealthAssessment = ({ traversalId, healthAssessment, conclusions, dispatch
         getRisks([]);
         dispatch(traversalConclusionGet(traversalId));
     }, [traversalId]);
+    useEffect(() => { dispatch(hraConclusionsGet() )}, []);
 
     const onConclusionsChanged = (ids) => getRisks(ids);
     const showExplanation = explanation => dispatch(populateModal(explanation));
 
-    const { riskSummary } = healthAssessment;
+    const { riskSummary, conclusionIds } = healthAssessment;
 
     return (
         <div>
@@ -29,7 +30,7 @@ const HealthAssessment = ({ traversalId, healthAssessment, conclusions, dispatch
                 </PanelContainer>
                 <PanelContainer key="conclusions">
                     <Panel>
-                        <CheckableConclusions riskSummary={riskSummary} conclusions={conclusions} onChange={onConclusionsChanged} showExplanation={showExplanation} />
+                        <CheckableConclusions conclusions={conclusions} conclusionIds={conclusionIds} onChange={onConclusionsChanged} showExplanation={showExplanation} />
                     </Panel>
                 </PanelContainer>
             </PoseGroup>
