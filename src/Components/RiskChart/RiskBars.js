@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { barLabelWidth, barWidth, barHeight, barInterval, minimumRiskColor, changeableRiskColor } from "./chartSettings";
 
 const StyledRect = styled.rect`
-    transition: width 0.5s, x 0.5s
+    transition: width 0.3s, x 0.3s
 `
 
 const RiskBar = ({ risk, y }) => {

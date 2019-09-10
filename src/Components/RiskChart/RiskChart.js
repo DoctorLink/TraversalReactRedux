@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 import { RiskBars } from "./RiskBars";
-import { barInterval, gridlineLabelHeight, barLabelWidth, barWidth } from "./chartSettings";
+import { fontSize, barInterval, gridlineLabelHeight, barLabelWidth, barWidth } from "./chartSettings";
 import { ChartKey } from "./ChartKey";
 import { GridLines } from "./GridLines";
 
 const StyledSvg = styled.svg`
-    font-size: 0.7rem;
+    font-size: ${fontSize};
     overflow: visible;
     width: 100%;
 `
