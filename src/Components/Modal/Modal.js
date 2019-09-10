@@ -154,7 +154,7 @@ const Modal = ({ explanation, closeModal }) => {
                                 <line x1="6" y1="6" x2="18" y2="18"></line>
                             </Icon>
                         </Header>
-                        <div dangerouslySetInnerHTML={{ __html: explanation }} />
+                        <div dangerouslySetInnerHTML={{ __html: explanation.replace(/\n/g, "<br>") }} />
                     </Content>
                 </Container>
             </Curtain>
