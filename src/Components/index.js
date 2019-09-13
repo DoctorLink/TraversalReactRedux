@@ -25,7 +25,7 @@ export { default as TextField } from './TextField'
 export { default as Title } from './Title'
 export { Dropdown, InlineDropdown } from './Dropdown'
 
-
+export { AccordionHeader, AccordionBody } from './Accordion'
 
 export { default as PanelBlocks } from './PanelBlocks'
 export { default as PanelContainer } from './PanelContainer'

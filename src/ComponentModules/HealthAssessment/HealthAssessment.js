@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { healthRisksGet, traversalConclusionGet, hraConclusionsGet, populateModal } from '../../Actions';
 import { Panel, PanelContainer } from '../../Components';
 import CheckableConclusions from './CheckableConclusions';
+import RiskExplanations from './RiskExplanations';
 import RiskScores, { AgeOptions } from './RiskScores';
 
 const HealthAssessment = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
@@ -31,6 +32,11 @@ const HealthAssessment = ({ traversalId, healthAssessment, conclusions, dispatch
                 <PanelContainer key="conclusions">
                     <Panel>
                         <CheckableConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} showExplanation={showExplanation} />
+                    </Panel>
+                </PanelContainer>
+                <PanelContainer key="explanations">
+                    <Panel>
+                        <RiskExplanations conclusions={conclusions} />
                     </Panel>
                 </PanelContainer>
             </PoseGroup>
