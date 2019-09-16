@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { PanelHeader, PanelContent, PanelBodyText, InlineDropdown, RiskChart } from '../../Components';
-import colors from '../../Theme/base/colors';
+import { connect } from "react-redux";
+import { PanelHeader, PanelContent, PanelBodyText, InlineDropdown, RiskChart } from '../../../Components';
+import colors from '../../../Theme/base/colors';
 
 export const AgeOptions = [50, 60, 70, 80, 90, 100, 110];
 
@@ -27,4 +28,5 @@ const RiskScores = ({ riskSummary }) => {
     )
 }
 
-export default RiskScores;
+const mapStateToProps = state => ({ riskSummary: state.healthAssessment.riskSummary });
+export default connect(mapStateToProps)(RiskScores);

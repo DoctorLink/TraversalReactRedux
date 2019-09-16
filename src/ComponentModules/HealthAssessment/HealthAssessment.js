@@ -1,51 +1,23 @@
 import React, { useEffect } from 'react'
-import { PoseGroup } from 'react-pose';
 import { connect } from "react-redux";
-import { healthRisksGet, traversalConclusionGet, hraConclusionsGet, populateModal } from '../../Actions';
-import { Panel, PanelContainer } from '../../Components';
-import CheckableConclusions from './CheckableConclusions';
-import RiskExplanations from './RiskExplanations';
-import RiskScores, { AgeOptions } from './RiskScores';
+import { healthRisksGet, traversalConclusionGet, hraConclusionsGet } from '../../Actions';
+import { AgeOptions } from './Risks/RiskScores';
+import Risks from './Risks/Risks';
 
-const HealthAssessment = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
-    const getRisks = (checkedConclusions) => dispatch(healthRisksGet(traversalId, AgeOptions, checkedConclusions));
+const HealthAssessment = ({ traversalId, dispatch }) => {
     useEffect(() => {
-        getRisks([]);
+        dispatch(healthRisksGet(traversalId, AgeOptions, []));
         dispatch(traversalConclusionGet(traversalId));
     }, [traversalId]);
+
     useEffect(() => { dispatch(hraConclusionsGet() )}, []);
-
-    const onConclusionsChanged = (ids) => getRisks(ids);
-    const showExplanation = explanation => dispatch(populateModal(explanation));
-
-    const { riskSummary, conclusionIds } = healthAssessment;
 
     return (
         <div>
             <h2>Global Health Check Scores</h2>
-            <PoseGroup animateOnMount={true}>
-                <PanelContainer key="risk" float="right">
-                    <Panel>
-                        <RiskScores riskSummary={riskSummary} />
-                    </Panel>
-                </PanelContainer>
-                <PanelContainer key="conclusions">
-                    <Panel>
-                        <CheckableConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} showExplanation={showExplanation} />
-                    </Panel>
-                </PanelContainer>
-                <PanelContainer key="explanations">
-                    <Panel>
-                        <RiskExplanations conclusions={conclusions} />
-                    </Panel>
-                </PanelContainer>
-            </PoseGroup>
+            <Risks traversalId={traversalId} />
         </div>
     )
 }
 
-const mapStateToProps = state => ({
-    healthAssessment: state.healthAssessment,
-    conclusions: state.conclusion && state.conclusion.conclusions || []
-});
-export default connect(mapStateToProps)(HealthAssessment);
+export default connect()(HealthAssessment);

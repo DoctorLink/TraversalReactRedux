@@ -18,7 +18,7 @@ describe("RiskScores component", () => {
     };
 
     let result;
-    beforeEach(() => result = render(<RiskScores riskSummary={riskSummary} />));
+    beforeEach(() => result = render(<RiskScores.WrappedComponent riskSummary={riskSummary} />));
 
     const getDropdown = () => result.getByText(/Your risks before the age of/).getElementsByTagName("select")[0];
 

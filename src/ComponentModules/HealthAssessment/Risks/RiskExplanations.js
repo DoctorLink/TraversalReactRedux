@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AccordionHeader, AccordionBody, PanelHeader, PanelContent, PanelConclusion, PanelBodyText } from "../../Components";
-import { replaceLineBreaks } from "../../Helpers";
-import colors from '../../Theme/base/colors';
+import { AccordionHeader, AccordionBody, PanelHeader, PanelContent, PanelConclusion, PanelBodyText } from "../../../Components";
+import { replaceLineBreaks } from "../../../Helpers";
+import colors from '../../../Theme/base/colors';
 
 const RiskExplanation = ({ conclusion }) => {
     const [open, setOpen] = useState(false);

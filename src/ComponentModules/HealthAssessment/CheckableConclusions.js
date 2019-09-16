@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { populateModal } from '../../Actions';
 import { PanelHeader, PanelContent, PanelConclusion, PanelBodyText, Checkbox, Label, InfoIcon, Answer } from "../../Components";
 import colors from '../../Theme/base/colors';
 
@@ -11,7 +13,7 @@ const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation })
     </Answer>
 )
 
-const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, showExplanation }) => {
+const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, dispatch }) => {
     const [selectedIds, setSelectedIds] = useState([]);
 
     const onCheckboxChange = (assetId, checked) => {
@@ -21,6 +23,8 @@ const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, sho
         setSelectedIds(newSelectedIds);
         onChange(newSelectedIds);
     }
+
+    const showExplanation = explanation => dispatch(populateModal(explanation));
 
     const conclusionsToDisplay = conclusions.filter(c => !c.silent && checkableConclusions.indexOf(c.assetId) > -1);
 
@@ -50,4 +54,4 @@ const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, sho
     );
 };
 
-export default CheckableConclusions;
+export default connect()(CheckableConclusions);

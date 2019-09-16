@@ -21,7 +21,7 @@ describe("CheckableConclusions component", () => {
 
     test("Shows only non-silent checkable conclusions", () => {
         const checkableConclusions = [ 1001, 1003, 1004, 1005, 1234 ];
-        result = render(<CheckableConclusions conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
+        result = render(<CheckableConclusions.WrappedComponent conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
 
         expect(queryCheckboxByConclusionId(1000)).toBeFalsy();
         expect(queryCheckboxByConclusionId(1001)).toBeTruthy();
@@ -32,7 +32,7 @@ describe("CheckableConclusions component", () => {
 
     test("Checking a conclusion calls onChange with checked IDs", () => {
         const checkableConclusions = [ 1001, 1003 ];
-        result = render(<CheckableConclusions conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
+        result = render(<CheckableConclusions.WrappedComponent conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
 
         const conc1001 = queryCheckboxByConclusionId(1001);
         const conc1003 = queryCheckboxByConclusionId(1003);
@@ -47,9 +47,9 @@ describe("CheckableConclusions component", () => {
         expect(onChange).lastCalledWith([1003]);
     })
 
-    test("Renders null if there are no conclusions to display", () => {
+    test("Renders nothing if there are no conclusions to display", () => {
         const checkableConclusions = [ 2000, 2001 ];
-        result = render(<CheckableConclusions conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
+        result = render(<CheckableConclusions.WrappedComponent conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
 
         expect(result.container.innerHTML).toBe("");
     })
