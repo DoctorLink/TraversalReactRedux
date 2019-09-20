@@ -1,8 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { PoseGroup } from 'react-pose';
-import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText } from '../../../Components';
+import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons } from '../../../Components';
 import { HealthAgeDial } from "./HealthAgeDial";
 import styled from "styled-components";
 
@@ -32,8 +31,8 @@ const HealthAge = ({ traversalId, healthAssessment }) => {
                         )}
                     </PanelContent>
                 </Panel>
-                <Link to={`/traversal/${traversalId}/risks`}>Next</Link>
             </PanelContainer>
+            <NavigationButtons key="nav" nextRoute={`/traversal/${traversalId}/risks`} />
         </PoseGroup>
     )
 }
