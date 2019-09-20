@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { populateModal } from '../../Actions';
-import { PanelHeader, PanelContent, PanelConclusion, PanelBodyText, Checkbox, Label, InfoIcon, Answer } from "../../Components";
-import colors from '../../Theme/base/colors';
+import { HealthReportPanelHeader, PanelContent, PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../Components";
 
 const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation }) => (
     <Answer>
@@ -34,9 +33,9 @@ const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, dis
 
     return (
         <>
-            <PanelHeader color={colors.grey200}>
-                <PanelBodyText bold>See the impact of making the following changes to your lifestyle</PanelBodyText>
-            </PanelHeader>
+            <HealthReportPanelHeader>
+                See the impact of making the following changes to your lifestyle
+            </HealthReportPanelHeader>
             <PanelContent>
                 {conclusionsToDisplay.map(conc => (
                     <PanelConclusion key={conc.assetId}>

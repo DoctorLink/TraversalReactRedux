@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux";
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { healthRisksGet, traversalConclusionGet, hraConclusionsGet } from '../../Actions';
 import { AgeOptions } from './Risks/RiskScores';
 import Risks from './Risks/Risks';
+import HealthAge from './HealthAge/HealthAge';
 
 const HealthAssessment = ({ traversalId, dispatch }) => {
     useEffect(() => {
@@ -10,12 +12,17 @@ const HealthAssessment = ({ traversalId, dispatch }) => {
         dispatch(traversalConclusionGet(traversalId));
     }, [traversalId]);
 
-    useEffect(() => { dispatch(hraConclusionsGet() )}, []);
+    useEffect(() => { dispatch(hraConclusionsGet()) }, []);
 
+    const basePath = `/traversal/${traversalId}`;
     return (
         <div>
             <h2>Global Health Check Scores</h2>
-            <Risks traversalId={traversalId} />
+            <Switch>
+                <Route path={`${basePath}/health-age`} render={() => <HealthAge traversalId={traversalId} />} />
+                <Route path={`${basePath}/risks`} render={() => <Risks traversalId={traversalId} />} />
+                <Route render={() => <Redirect to={`${basePath}/health-age`} />} />
+            </Switch>
         </div>
     )
 }

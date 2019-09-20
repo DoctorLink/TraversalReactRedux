@@ -37,6 +37,7 @@ export { default as PanelConclusion } from './PanelConclusion'
 export { default as PanelBodyText } from './PanelBodyText'
 export { default as PanelConclusionTitle } from './PanelConclusionTitle'
 export { default as PanelSVG } from './PanelSVG'
+export { default as HealthReportPanelHeader } from './HealthReportPanelHeader'
 
 
 export { default as Loader } from './Loader'
