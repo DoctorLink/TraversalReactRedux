@@ -1,4 +1,4 @@
-import { HEALTH_RISKS_SET, HRA_CONCLUSIONS_SET, CHECK_CONCLUSION, UNCHECK_CONCLUSION } from '../../Actions'
+import { HEALTH_RISKS_SET, HRA_CONCLUSIONS_SET, HRA_CHECK_CONCLUSION, HRA_UNCHECK_CONCLUSION } from '../../Actions'
 
 const defaultState = {
     riskSummary: {
@@ -18,9 +18,9 @@ const healthAssessment = (state = defaultState, action) => {
             return { ...state, riskSummary: action.healthRisks };
         case HRA_CONCLUSIONS_SET:
             return { ...state, conclusionIds: action.conclusionIds };
-        case CHECK_CONCLUSION:
+        case HRA_CHECK_CONCLUSION:
             return { ...state, checkedConclusions: [...state.checkedConclusions, action.id] };
-        case UNCHECK_CONCLUSION:
+        case HRA_UNCHECK_CONCLUSION:
             return { ...state, checkedConclusions: state.checkedConclusions.filter(id => id !== action.id) };
         default:
             return state;
