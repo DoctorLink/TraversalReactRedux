@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import styled from "styled-components";
-import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons } from '../../../Components';
+import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion } from '../../../Components';
 import { healthRisksGet } from '../../../Actions';
 import CheckableConclusions from '../CheckableConclusions';
 import { AgeOptions } from '../Risks/RiskScores';
@@ -28,12 +28,13 @@ const HealthAge = ({ traversalId, healthAssessment, conclusions, dispatch }) => 
                     </HealthReportPanelHeader>
                     <PanelContent>
                         <HealthAgeDial age={age} healthAge={healthAge} minimumHealthAge={minimumHealthAge} />
-                        {healthAge && <Centered>Your health age is <strong>{healthAge}</strong></Centered>}
-                        {ageReduction > 0 &&
-                            <Centered>But you could be up to <strong>{ageReduction}</strong> years younger by making the below changes</Centered>}
-                        {ageReduction == 0 &&
-                        <Centered>Which is the best it can be</Centered>}
-
+                        <PanelConclusion>
+                            {healthAge && <Centered>Your health age is <strong>{healthAge}</strong></Centered>}
+                            {ageReduction > 0 &&
+                                <Centered>But you could be up to <strong>{ageReduction}</strong> years younger by making the below changes</Centered>}
+                            {ageReduction === 0 &&
+                                <Centered>Which is the best it can be</Centered>}
+                        </PanelConclusion>
                         <CheckableConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} />
                     </PanelContent>
                 </Panel>
