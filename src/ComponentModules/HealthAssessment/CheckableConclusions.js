@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { populateModal } from '../../Actions';
-import { HealthReportPanelHeader, PanelContent, PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../Components";
+import { PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../Components";
 
 const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation }) => (
     <Answer>
@@ -33,22 +33,15 @@ const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, dis
 
     return (
         <>
-            <HealthReportPanelHeader>
-                See the impact of making the following changes to your lifestyle
-            </HealthReportPanelHeader>
-            <PanelContent>
-                {conclusionsToDisplay.map(conc => (
-                    <PanelConclusion key={conc.assetId}>
-                        <CheckableConclusion
-                            conclusion={conc}
-                            checked={selectedIds.indexOf(conc.assetId) > -1}
-                            onChange={onCheckboxChange}
-                            showExplanation={showExplanation} />
-                    </PanelConclusion>
-                ))}
-            </PanelContent>
-
-
+            {conclusionsToDisplay.map(conc => (
+                <PanelConclusion key={conc.assetId}>
+                    <CheckableConclusion
+                        conclusion={conc}
+                        checked={selectedIds.indexOf(conc.assetId) > -1}
+                        onChange={onCheckboxChange}
+                        showExplanation={showExplanation} />
+                </PanelConclusion>
+            ))}
         </>
     );
 };

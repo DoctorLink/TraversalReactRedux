@@ -1,18 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
-import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons } from '../../../Components';
-import { HealthAgeDial } from "./HealthAgeDial";
 import styled from "styled-components";
+import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons } from '../../../Components';
+import { healthRisksGet } from '../../../Actions';
+import CheckableConclusions from '../CheckableConclusions';
+import { AgeOptions } from '../Risks/RiskScores';
+import { HealthAgeDial } from "./HealthAgeDial";
 
-const CenteredBodyText = styled(PanelBodyText)`
+const Centered = styled(PanelBodyText)`
     text-align: center;
 `
 
-const HealthAge = ({ traversalId, healthAssessment }) => {
+const HealthAge = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
 
-    const { riskSummary } = healthAssessment;
+    const { riskSummary, conclusionIds } = healthAssessment;
     const { age, healthAge, minimumHealthAge } = riskSummary;
+    const ageReduction = healthAge - minimumHealthAge;
+    const onConclusionsChanged = (ids) => dispatch(healthRisksGet(traversalId, AgeOptions, ids));
 
     return (
         <PoseGroup animateOnMount={true}>
@@ -23,12 +28,13 @@ const HealthAge = ({ traversalId, healthAssessment }) => {
                     </HealthReportPanelHeader>
                     <PanelContent>
                         <HealthAgeDial age={age} healthAge={healthAge} minimumHealthAge={minimumHealthAge} />
-                        {healthAge && (
-                            <>
-                                <CenteredBodyText>Your health age is <strong>{healthAge}</strong></CenteredBodyText>
-                                <CenteredBodyText>But you could be up to <strong>{healthAge - minimumHealthAge}</strong> years younger by making the below changes</CenteredBodyText>
-                            </>
-                        )}
+                        {healthAge && <Centered>Your health age is <strong>{healthAge}</strong></Centered>}
+                        {ageReduction > 0 &&
+                            <Centered>But you could be up to <strong>{ageReduction}</strong> years younger by making the below changes</Centered>}
+                        {ageReduction == 0 &&
+                        <Centered>Which is the best it can be</Centered>}
+
+                        <CheckableConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} />
                     </PanelContent>
                 </Panel>
             </PanelContainer>
