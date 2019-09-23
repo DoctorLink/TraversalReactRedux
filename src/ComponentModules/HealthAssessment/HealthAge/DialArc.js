@@ -6,7 +6,6 @@ import { describeArc } from "./describeArc";
 const Arc = styled.path`
     fill: none;
     stroke: url(#rag-gradient);
-    stroke-width: 3;
     stroke-linecap: round;
 `
 
@@ -18,13 +17,13 @@ const Gradient = () => (
     </linearGradient>
 );
 
-const DialArc = ({ cx, cy, radius, startAngle, endAngle }) => {
+const DialArc = ({ cx, cy, radius, startAngle, endAngle, strokeWidth }) => {
     return (
         <g>
             <defs>
                 <Gradient />
             </defs>
-            <Arc d={describeArc(cx, cy, radius, startAngle, endAngle)} />
+            <Arc d={describeArc(cx, cy, radius, startAngle, endAngle)} strokeWidth={strokeWidth} />
         </g>
     );
 }
