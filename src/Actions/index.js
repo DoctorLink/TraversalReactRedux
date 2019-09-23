@@ -72,3 +72,9 @@ export const hraConclusionsGet = () => ({ type: HRA_CONCLUSIONS_GET })
 
 export const HRA_CONCLUSIONS_SET = 'HRA_CONCLUSIONS_SET'
 export const hraConclusionsSet = conclusionIds => ({ type: HRA_CONCLUSIONS_SET, conclusionIds })
+
+export const CHECK_CONCLUSION = 'CHECK_CONCLUSION'
+export const checkConclusion = id => ({ type: CHECK_CONCLUSION, id });
+
+export const UNCHECK_CONCLUSION = 'UNCHECK_CONCLUSION'
+export const uncheckConclusion = id => ({ type: UNCHECK_CONCLUSION, id });

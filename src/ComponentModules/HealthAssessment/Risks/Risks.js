@@ -2,14 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import { Panel, PanelContainer, NavigationButtons } from '../../../Components';
-import { healthRisksGet } from '../../../Actions';
 import RiskExplanations from './RiskExplanations';
 import RiskConclusions from './RiskConclusions';
-import RiskScores, { AgeOptions } from './RiskScores';
+import RiskScores from './RiskScores';
 
-const Risks = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
-    const onConclusionsChanged = (ids) => dispatch(healthRisksGet(traversalId, AgeOptions, ids));
-
+const Risks = ({ traversalId, healthAssessment, conclusions }) => {
     const { conclusionIds } = healthAssessment;
 
     return (
@@ -20,7 +17,7 @@ const Risks = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
                 </Panel>
             </PanelContainer>
             <PanelContainer key="conclusions">
-                <RiskConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} />
+                <RiskConclusions traversalId={traversalId} checkableConclusions={conclusionIds.riskConclusions} />
             </PanelContainer>
             <PanelContainer key="explanations">
                 <Panel>
@@ -30,7 +27,7 @@ const Risks = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
             <NavigationButtons
                 key="nav"
                 previousRoute={`/traversal/${traversalId}/health-age`}
-                nextRoute={`/traversal/${traversalId}/wellbeing`}
+                // nextRoute={`/traversal/${traversalId}/wellbeing`}
             />
         </PoseGroup>
     )

@@ -1,10 +1,14 @@
 import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import CheckableConclusions from "./CheckableConclusions";
+import { healthRisksGet } from "../../Actions";
+import { rootTraversalReducer } from "../../Reducers";
 
 describe("CheckableConclusions component", () => {
-    
+
     const conclusions = [
         { assetId: 1000, displayText: "Lower BP to less than 140/90", explanation: "" },
         { assetId: 1001, displayText: "Eat more healthily", explanation: "" },
@@ -13,43 +17,69 @@ describe("CheckableConclusions component", () => {
         { assetId: 1004, displayText: "Eat more vegetables", silent: true, explanation: "" },
     ]
 
-    const onChange = jest.fn();
+    const props = {
+        traversalId: "test",
+        conclusions,
+        checkableConclusions: [],
+    }
 
-    let result;
+    const initialState = {
+        conclusion: { conclusions },
+        healthAssessment: { checkedConclusions: [] }
+    };
 
-    const queryCheckboxByConclusionId = (assetId) => result.queryByLabelText(conclusions.find(c => c.assetId == assetId).displayText);
+    const renderComponent = (props, state = initialState) => {
+        const store = createStore(rootTraversalReducer, state);
+        store.dispatch = jest.fn(store.dispatch);
+        return {
+            ...render(
+                <Provider store={store}>
+                    <CheckableConclusions {...props} />
+                </Provider>
+            ),
+            store
+        }
+    };
+
+    const queryCheckboxByConclusionId = (result, assetId) => result.queryByLabelText(conclusions.find(c => c.assetId == assetId).displayText);
 
     test("Shows only non-silent checkable conclusions", () => {
-        const checkableConclusions = [ 1001, 1003, 1004, 1005, 1234 ];
-        result = render(<CheckableConclusions.WrappedComponent conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
+        const checkableConclusions = [1001, 1003, 1004, 1005, 1234];
+        const result = renderComponent({ ...props, checkableConclusions });
 
-        expect(queryCheckboxByConclusionId(1000)).toBeFalsy();
-        expect(queryCheckboxByConclusionId(1001)).toBeTruthy();
-        expect(queryCheckboxByConclusionId(1002)).toBeFalsy();
-        expect(queryCheckboxByConclusionId(1003)).toBeTruthy();
-        expect(queryCheckboxByConclusionId(1004)).toBeFalsy();
+        expect(queryCheckboxByConclusionId(result, 1000)).toBeFalsy();
+        expect(queryCheckboxByConclusionId(result, 1001)).toBeTruthy();
+        expect(queryCheckboxByConclusionId(result, 1002)).toBeFalsy();
+        expect(queryCheckboxByConclusionId(result, 1003)).toBeTruthy();
+        expect(queryCheckboxByConclusionId(result, 1004)).toBeFalsy();
     })
 
-    test("Checking a conclusion calls onChange with checked IDs", () => {
-        const checkableConclusions = [ 1001, 1003 ];
-        result = render(<CheckableConclusions.WrappedComponent conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
+    test("Checking a conclusion dispatches healthRisksGet with checked IDs", () => {
+        const checkableConclusions = [1001, 1003];
+        const result = renderComponent({ ...props, checkableConclusions });
 
-        const conc1001 = queryCheckboxByConclusionId(1001);
-        const conc1003 = queryCheckboxByConclusionId(1003);
+        const conc1001 = queryCheckboxByConclusionId(result, 1001);
+        const conc1003 = queryCheckboxByConclusionId(result, 1003);
 
         fireEvent.click(conc1001);
-        expect(onChange).lastCalledWith([1001]);
+        expect(conc1001.checked).toBe(true);
+        expect(conc1003.checked).toBe(false);
+        expect(result.store.dispatch).lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1001]));
 
         fireEvent.click(conc1003);
-        expect(onChange).lastCalledWith([1001, 1003]);
+        expect(conc1001.checked).toBe(true);
+        expect(conc1003.checked).toBe(true);
+        expect(result.store.dispatch).lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1001, 1003]));
 
         fireEvent.click(conc1001);
-        expect(onChange).lastCalledWith([1003]);
+        expect(conc1001.checked).toBe(false);
+        expect(conc1003.checked).toBe(true);
+        expect(result.store.dispatch).lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1003]));
     })
 
     test("Renders nothing if there are no conclusions to display", () => {
-        const checkableConclusions = [ 2000, 2001 ];
-        result = render(<CheckableConclusions.WrappedComponent conclusions={conclusions} checkableConclusions={checkableConclusions} onChange={onChange} />);
+        const checkableConclusions = [2000, 2001];
+        const result = renderComponent({ ...props, checkableConclusions });
 
         expect(result.container.innerHTML).toBe("");
     })

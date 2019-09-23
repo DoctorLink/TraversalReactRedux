@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { populateModal } from '../../Actions';
+import { populateModal, checkConclusion, uncheckConclusion, healthRisksGet } from '../../Actions';
 import { PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../Components";
+import { AgeOptions } from './Risks/RiskScores';
 
 const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation }) => (
     <Answer>
@@ -12,18 +13,16 @@ const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation })
     </Answer>
 )
 
-const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, dispatch }) => {
-    const [selectedIds, setSelectedIds] = useState([]);
-
-    const onCheckboxChange = (assetId, checked) => {
-        const newSelectedIds = checked
-            ? [...selectedIds, assetId]
-            : selectedIds.filter(id => id !== assetId);
-        setSelectedIds(newSelectedIds);
-        onChange(newSelectedIds);
-    }
+const CheckableConclusions = ({ traversalId, checkableConclusions, conclusions, selectedIds, dispatch }) => {
+    const onCheckboxChange = (assetId, checked) => checked
+        ? dispatch(checkConclusion(assetId))
+        : dispatch(uncheckConclusion(assetId));
 
     const showExplanation = explanation => dispatch(populateModal(explanation));
+
+    useEffect(() => {
+        dispatch(healthRisksGet(traversalId, AgeOptions, selectedIds));
+     }, [selectedIds]);
 
     const conclusionsToDisplay = conclusions.filter(c => !c.silent && checkableConclusions.indexOf(c.assetId) > -1);
 
@@ -46,4 +45,8 @@ const CheckableConclusions = ({ conclusions, checkableConclusions, onChange, dis
     );
 };
 
-export default connect()(CheckableConclusions);
+const mapStateToProps = state => ({
+    conclusions: state.conclusion && state.conclusion.conclusions || [],
+    selectedIds: state.healthAssessment.checkedConclusions
+});
+export default connect(mapStateToProps)(CheckableConclusions);

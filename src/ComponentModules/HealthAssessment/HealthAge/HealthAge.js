@@ -3,21 +3,18 @@ import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import styled from "styled-components";
 import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion } from '../../../Components';
-import { healthRisksGet } from '../../../Actions';
 import CheckableConclusions from '../CheckableConclusions';
-import { AgeOptions } from '../Risks/RiskScores';
 import { HealthAgeDial } from "./HealthAgeDial";
 
 const Centered = styled(PanelBodyText)`
     text-align: center;
 `
 
-const HealthAge = ({ traversalId, healthAssessment, conclusions, dispatch }) => {
+const HealthAge = ({ traversalId, healthAssessment }) => {
 
     const { riskSummary, conclusionIds } = healthAssessment;
     const { age, healthAge, minimumHealthAge } = riskSummary;
     const ageReduction = healthAge - minimumHealthAge;
-    const onConclusionsChanged = (ids) => dispatch(healthRisksGet(traversalId, AgeOptions, ids));
 
     return (
         <PoseGroup animateOnMount={true}>
@@ -35,7 +32,7 @@ const HealthAge = ({ traversalId, healthAssessment, conclusions, dispatch }) => 
                             {ageReduction === 0 &&
                                 <Centered>Which is the best it can be</Centered>}
                         </PanelConclusion>
-                        <CheckableConclusions conclusions={conclusions} checkableConclusions={conclusionIds.riskConclusions} onChange={onConclusionsChanged} />
+                        <CheckableConclusions traversalId={traversalId} checkableConclusions={conclusionIds.riskConclusions} />
                     </PanelContent>
                 </Panel>
             </PanelContainer>
@@ -45,7 +42,6 @@ const HealthAge = ({ traversalId, healthAssessment, conclusions, dispatch }) => 
 }
 
 const mapStateToProps = state => ({
-    healthAssessment: state.healthAssessment,
-    conclusions: state.conclusion && state.conclusion.conclusions || []
+    healthAssessment: state.healthAssessment
 });
 export default connect(mapStateToProps)(HealthAge);
