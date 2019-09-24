@@ -4,7 +4,7 @@ import { PoseGroup } from 'react-pose';
 import styled from "styled-components";
 import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion } from '../../../Components';
 import CheckableConclusions from '../Conclusions/CheckableConclusions';
-import { useRiskSummary } from "../Hooks/useRiskSummary";
+import { useRiskSummary } from "../Hooks";
 import { HealthAgeDial } from "./HealthAgeDial";
 
 const Centered = styled(PanelBodyText)`

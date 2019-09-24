@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HealthReportPanelHeader, PanelContent, InlineDropdown, RiskChart } from '../../../Components';
-import { useRiskSummary } from "../Hooks/useRiskSummary";
+import { useRiskSummary } from "../Hooks";
 
 const AgeOptions = [50, 60, 70, 80, 90, 100, 110];
 
