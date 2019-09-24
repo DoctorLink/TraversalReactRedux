@@ -7,7 +7,7 @@ const getTrianglePoints = ({ cx, cy, radius, width, height }) => {
     const middle = cx;
     const left = middle - width / 2;
     const right = left + width;
-    return `${left} ${top}, ${right} ${top}, ${middle} ${bottom}`;
+    return `${left} ${bottom}, ${right} ${bottom}, ${middle} ${top}`;
 }
 
 const StyledPolygon = styled.polygon`

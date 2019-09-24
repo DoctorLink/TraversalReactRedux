@@ -4,13 +4,13 @@ import { DialArc } from "./DialArc";
 import { DialPointer } from "./DialPointer";
 
 const width = 100;
-const height = 52;
+const height = 53;
 const centre = { x: 50, y: 50 };
 const arcStrokeWidth = 3;
-const arcRadius = 43;
-const pointerRadius = arcRadius + (arcStrokeWidth / 2) + 0.5;
-const pointerWidth = 4;
-const pointerHeight = 4;
+const arcRadius = 48;
+const pointerWidth = 4.5;
+const pointerHeight = 3;
+const pointerRadius = arcRadius - (arcStrokeWidth / 2) - pointerHeight - 0.5;
 
 const HealthAgeDial = ({ age, healthAge, minimumHealthAge }) => {
     const angle = getPointerAngle(age, healthAge, minimumHealthAge);
