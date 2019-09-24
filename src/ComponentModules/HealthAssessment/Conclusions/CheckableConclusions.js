@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { populateModal, checkConclusion, uncheckConclusion } from '../../../Actions';
 import { PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../../Components";
