@@ -3,16 +3,16 @@ import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import styled from "styled-components";
 import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion } from '../../../Components';
-import CheckableConclusions from '../CheckableConclusions';
+import CheckableConclusions from '../Conclusions/CheckableConclusions';
+import { useRiskSummary } from "../Hooks/useRiskSummary";
 import { HealthAgeDial } from "./HealthAgeDial";
 
 const Centered = styled(PanelBodyText)`
     text-align: center;
 `
 
-const HealthAge = ({ traversalId, healthAssessment }) => {
-
-    const { riskSummary, conclusionIds } = healthAssessment;
+const HealthAge = ({ traversalId, conclusionIds }) => {
+    const riskSummary = useRiskSummary(traversalId);
     const { age, healthAge, minimumHealthAge } = riskSummary;
     const ageReduction = healthAge - minimumHealthAge;
 
@@ -42,6 +42,6 @@ const HealthAge = ({ traversalId, healthAssessment }) => {
 }
 
 const mapStateToProps = state => ({
-    healthAssessment: state.healthAssessment
+    conclusionIds: state.healthAssessment.conclusionIds
 });
 export default connect(mapStateToProps)(HealthAge);

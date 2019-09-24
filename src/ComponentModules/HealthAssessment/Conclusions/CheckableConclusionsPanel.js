@@ -1,6 +1,6 @@
 import React from 'react'
 import { Panel, HealthReportPanelHeader, PanelContent } from '../../../Components';
-import CheckableConclusions from '../CheckableConclusions';
+import CheckableConclusions from './CheckableConclusions';
 
 const RiskConclusions = ({ traversalId, checkableConclusions }) => (
     <Panel>

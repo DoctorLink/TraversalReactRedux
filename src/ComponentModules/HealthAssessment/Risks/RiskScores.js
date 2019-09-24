@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { connect } from "react-redux";
 import { HealthReportPanelHeader, PanelContent, InlineDropdown, RiskChart } from '../../../Components';
+import { useRiskSummary } from "../Hooks/useRiskSummary";
 
-export const AgeOptions = [50, 60, 70, 80, 90, 100, 110];
+const AgeOptions = [50, 60, 70, 80, 90, 100, 110];
 
-const RiskScores = ({ riskSummary }) => {
+const RiskScores = ({traversalId}) => {
+    const riskSummary = useRiskSummary(traversalId, AgeOptions);
     if (!riskSummary) return null;
 
     const { age, risks } = riskSummary;
@@ -25,5 +26,4 @@ const RiskScores = ({ riskSummary }) => {
     )
 }
 
-const mapStateToProps = state => ({ riskSummary: state.healthAssessment.riskSummary });
-export default connect(mapStateToProps)(RiskScores);
+export default RiskScores;

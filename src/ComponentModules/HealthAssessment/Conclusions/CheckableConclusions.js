@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { populateModal, checkConclusion, uncheckConclusion, healthRisksGet } from '../../Actions';
-import { PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../Components";
-import { AgeOptions } from './Risks/RiskScores';
+import { populateModal, checkConclusion, uncheckConclusion } from '../../../Actions';
+import { PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../../Components";
 
 const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation }) => (
     <Answer>
@@ -13,16 +12,12 @@ const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation })
     </Answer>
 )
 
-const CheckableConclusions = ({ traversalId, checkableConclusions, conclusions, selectedIds, dispatch }) => {
+const CheckableConclusions = ({ checkableConclusions, conclusions, selectedIds, dispatch }) => {
     const onCheckboxChange = (assetId, checked) => checked
         ? dispatch(checkConclusion(assetId))
         : dispatch(uncheckConclusion(assetId));
 
     const showExplanation = explanation => dispatch(populateModal(explanation));
-
-    useEffect(() => {
-        dispatch(healthRisksGet(traversalId, AgeOptions, selectedIds));
-     }, [selectedIds]);
 
     const conclusionsToDisplay = conclusions.filter(c => !c.silent && checkableConclusions.indexOf(c.assetId) > -1);
 

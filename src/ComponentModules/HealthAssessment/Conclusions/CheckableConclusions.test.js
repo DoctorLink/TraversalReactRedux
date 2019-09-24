@@ -1,11 +1,9 @@
 import React from "react";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import { render, fireEvent } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
+import { rootTraversalReducer } from "../../../Reducers";
+import { renderWithRedux } from "../../../TestUtils";
 import CheckableConclusions from "./CheckableConclusions";
-import { healthRisksGet } from "../../Actions";
-import { rootTraversalReducer } from "../../Reducers";
 
 describe("CheckableConclusions component", () => {
 
@@ -28,18 +26,7 @@ describe("CheckableConclusions component", () => {
         healthAssessment: { checkedConclusions: [] }
     };
 
-    const renderComponent = (props, state = initialState) => {
-        const store = createStore(rootTraversalReducer, state);
-        store.dispatch = jest.fn(store.dispatch);
-        return {
-            ...render(
-                <Provider store={store}>
-                    <CheckableConclusions {...props} />
-                </Provider>
-            ),
-            store
-        }
-    };
+    const renderComponent = (props) => renderWithRedux(<CheckableConclusions {...props} />, rootTraversalReducer, initialState);
 
     const queryCheckboxByConclusionId = (result, assetId) => result.queryByLabelText(conclusions.find(c => c.assetId == assetId).displayText);
 
@@ -64,17 +51,17 @@ describe("CheckableConclusions component", () => {
         fireEvent.click(conc1001);
         expect(conc1001.checked).toBe(true);
         expect(conc1003.checked).toBe(false);
-        expect(result.store.dispatch).lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1001]));
+        expect(result.store.getState().healthAssessment.checkedConclusions).toEqual([1001]); // lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1001]));
 
         fireEvent.click(conc1003);
         expect(conc1001.checked).toBe(true);
         expect(conc1003.checked).toBe(true);
-        expect(result.store.dispatch).lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1001, 1003]));
+        expect(result.store.getState().healthAssessment.checkedConclusions).toEqual([1001, 1003]);
 
         fireEvent.click(conc1001);
         expect(conc1001.checked).toBe(false);
         expect(conc1003.checked).toBe(true);
-        expect(result.store.dispatch).lastCalledWith(healthRisksGet(props.traversalId, expect.any(Array), [1003]));
+        expect(result.store.getState().healthAssessment.checkedConclusions).toEqual([1003]);
     })
 
     test("Renders nothing if there are no conclusions to display", () => {

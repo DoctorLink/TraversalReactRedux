@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import { Panel, PanelContainer, NavigationButtons } from '../../../Components';
 import RiskExplanations from './RiskExplanations';
-import RiskConclusions from './RiskConclusions';
+import CheckableConclusionsPanel from '../Conclusions/CheckableConclusionsPanel';
 import RiskScores from './RiskScores';
 
 const Risks = ({ traversalId, healthAssessment, conclusions }) => {
@@ -13,11 +13,11 @@ const Risks = ({ traversalId, healthAssessment, conclusions }) => {
         <PoseGroup animateOnMount={true}>
             <PanelContainer key="risk" float="right">
                 <Panel>
-                    <RiskScores />
+                    <RiskScores traversalId={traversalId} />
                 </Panel>
             </PanelContainer>
             <PanelContainer key="conclusions">
-                <RiskConclusions traversalId={traversalId} checkableConclusions={conclusionIds.riskConclusions} />
+                <CheckableConclusionsPanel traversalId={traversalId} checkableConclusions={conclusionIds.riskConclusions} />
             </PanelContainer>
             <PanelContainer key="explanations">
                 <Panel>
