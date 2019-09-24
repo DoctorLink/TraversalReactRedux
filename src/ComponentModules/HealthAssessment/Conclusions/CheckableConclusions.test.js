@@ -43,7 +43,7 @@ describe("CheckableConclusions component", () => {
 
     test("Checking a conclusion updates store", () => {
         const checkableConclusions = [1001, 1003];
-        const result, { store } = renderComponent({ ...props, checkableConclusions });
+        const result = renderComponent({ ...props, checkableConclusions });
 
         const conc1001 = queryCheckboxByConclusionId(result, 1001);
         const conc1003 = queryCheckboxByConclusionId(result, 1003);
@@ -51,17 +51,17 @@ describe("CheckableConclusions component", () => {
         fireEvent.click(conc1001);
         expect(conc1001.checked).toBe(true);
         expect(conc1003.checked).toBe(false);
-        expect(store.getState().healthAssessment.checkedConclusions).toEqual([1001]);
+        expect(result.store.getState().healthAssessment.checkedConclusions).toEqual([1001]);
 
         fireEvent.click(conc1003);
         expect(conc1001.checked).toBe(true);
         expect(conc1003.checked).toBe(true);
-        expect(store.getState().healthAssessment.checkedConclusions).toEqual([1001, 1003]);
+        expect(result.store.getState().healthAssessment.checkedConclusions).toEqual([1001, 1003]);
 
         fireEvent.click(conc1001);
         expect(conc1001.checked).toBe(false);
         expect(conc1003.checked).toBe(true);
-        expect(store.getState().healthAssessment.checkedConclusions).toEqual([1003]);
+        expect(result.store.getState().healthAssessment.checkedConclusions).toEqual([1003]);
     })
 
     test("Renders nothing if there are no conclusions to display", () => {
