@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { axisColor, origin, chartTop, chartRight } from "./chartSettings";
+import { axisColor, origin, chartTop } from "./chartSettings";
 
 const YAxisLabel = ({ label }) => (
     <text textAnchor="end" alignmentBaseline="middle" x={origin.x - 2} y={label.y}>{label.label}</text>
@@ -21,7 +21,7 @@ const XAxis = ({ data }) => {
     const { y } = origin;
     return (
         <g>
-            <Axis x1={origin.x} x2={chartRight} y1={y} y2={y} />
+            <Axis x1={origin.x} x2="100%" y1={y} y2={y} />
             {data.map(item =>
                 <XAxisLabel key={item.label} x={item.x} y={y + 5}>{item.label}</XAxisLabel>)}
         </g>

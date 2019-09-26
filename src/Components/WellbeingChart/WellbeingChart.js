@@ -14,12 +14,12 @@ const StyledSvg = styled.svg`
 const getY = (percent) => (1 - percent / 100) * barMaxHeight + barTop;
 
 const mapDataPoints = (scores) => {
-    const barInterval = chartWidth / scores.length;
+    const barInterval = chartWidth / (scores.length + 1);
     return scores.map((score, index) => ({
         label: score.name,
         value: score.score,
         // These are coordinates in SVG space (relative to top left), not relative to the chart origin.
-        x: origin.x + (index + 0.5) * barInterval,
+        x: origin.x + (index + 1) * barInterval,
         y: getY(score.score)
     }));
 }
@@ -31,7 +31,7 @@ const WellbeingChart = ({ scores }) => {
     const individualScores = scores.filter(s => s !== overallScore);
     const data = mapDataPoints(individualScores);
     return (
-        <StyledSvg viewBox="0 0 100 100">
+        <StyledSvg viewBox="0 0 100 90">
             <title>Your lifestyle scores</title>
             <WellbeingBars data={data} />
             <XAxis data={data} />

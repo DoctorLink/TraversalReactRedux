@@ -12,10 +12,10 @@ const linecapRadius = barWidth / 2;
 
 export const chartWidth = 70;
 export const chartHeight = barMaxHeight + linecapRadius;
-export const chartTop = 10;
+export const chartTop = 5;
 
 export const origin = {
-    x: 10,
+    x: 11,
     y: chartTop + chartHeight
 }
 
