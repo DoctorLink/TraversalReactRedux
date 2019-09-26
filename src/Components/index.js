@@ -56,3 +56,5 @@ export { default as SecondaryChoice } from './SecondaryChoice'
 
 export { RiskChart } from './RiskChart'
 export { WellbeingChart } from './WellbeingChart'
+
+export { UpdateWhenVisible } from './UpdateWhenVisible'

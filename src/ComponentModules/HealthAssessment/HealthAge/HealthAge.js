@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import styled from "styled-components";
-import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion } from '../../../Components';
+import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion, UpdateWhenVisible } from '../../../Components';
 import CheckableConclusions from '../Conclusions/CheckableConclusions';
 import { useRiskSummary } from "../Hooks";
 import { HealthAgeDial } from "./HealthAgeDial";
@@ -24,7 +24,9 @@ const HealthAge = ({ traversalId, conclusionIds }) => {
                         Your health age report
                     </HealthReportPanelHeader>
                     <PanelContent>
-                        <HealthAgeDial age={age} healthAge={healthAge} minimumHealthAge={minimumHealthAge} />
+                        <UpdateWhenVisible offset={{top: -20}}>
+                            <HealthAgeDial age={age} healthAge={healthAge} minimumHealthAge={minimumHealthAge} />
+                        </UpdateWhenVisible>
                         <PanelConclusion>
                             {healthAge && <Centered>Your health age is <strong>{healthAge}</strong></Centered>}
                             {ageReduction > 0 &&
