@@ -10,7 +10,7 @@ export const barColor = colors.green100;
 
 const linecapRadius = barWidth / 2;
 
-export const chartWidth = 70;
+export const chartWidth = 67;
 export const chartHeight = barMaxHeight + linecapRadius;
 export const chartTop = 5;
 

@@ -9,6 +9,9 @@ const StyledSvg = styled.svg`
     font-size: ${fontSize};
     overflow: visible;
     width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: auto;
 `
 
 const getY = (percent) => (1 - percent / 100) * barMaxHeight + barTop;
