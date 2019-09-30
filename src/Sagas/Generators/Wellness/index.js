@@ -10,6 +10,7 @@ export default (api) => function* wellness(action) {
         const wellness = yield call(api.wellness, action.traversalId, action.conclusions);
         yield put(actions.hraWellnessSet(wellness));
     } catch (error) {
-        console.error("wellness error", error)
+        console.error("wellness error", error);
+        alert("error");
     }
 }

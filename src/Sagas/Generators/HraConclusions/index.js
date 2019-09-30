@@ -10,6 +10,7 @@ export default (api) => function* healthRisks() {
         const conclusionIds = yield call(api.conclusionIds);
         yield put(actions.hraConclusionsSet(conclusionIds));
     } catch (error) {
-        console.error("Error getting HRA conclusions", error)
+        console.error("Error getting HRA conclusions", error);
+        alert("error");
     }
 }
