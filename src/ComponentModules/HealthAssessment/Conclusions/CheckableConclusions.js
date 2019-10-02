@@ -1,15 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { populateModal, checkConclusion, uncheckConclusion } from '../../../Actions';
-import { PanelConclusion, Checkbox, Label, InfoIcon, Answer } from "../../../Components";
+import { PanelConclusion, Checkbox, Label, InfoIcon } from "../../../Components";
+import { Conclusion } from "./Conclusion";
 
 const CheckableConclusion = ({ conclusion, checked, onChange, showExplanation }) => (
-    <Answer>
+    <Conclusion>
         <Label answer={conclusion}>
             <Checkbox type="checkbox" checked={checked} onChange={e => onChange(conclusion.assetId, e.target.checked)} />
         </Label>
         <InfoIcon onClick={showExplanation} explanation={conclusion.explanation} />
-    </Answer>
+    </Conclusion>
 )
 
 const CheckableConclusions = ({ checkableConclusions, conclusions, selectedIds, dispatch }) => {

@@ -5,6 +5,7 @@ import { traversalConclusionGet, hraConclusionsGet } from '../../Actions';
 import Risks from './Risks/Risks';
 import HealthAge from './HealthAge/HealthAge';
 import Wellbeing from './Wellbeing/Wellbeing';
+import AdditionalInfo from './AdditionalInfo/AdditionalInfo';
 
 const HealthAssessment = ({ traversalId, dispatch }) => {
     useEffect(() => { dispatch(traversalConclusionGet(traversalId)) }, [traversalId]);
@@ -18,6 +19,7 @@ const HealthAssessment = ({ traversalId, dispatch }) => {
                 <Route path={`${basePath}/health-age`} render={() => <HealthAge traversalId={traversalId} />} />
                 <Route path={`${basePath}/risks`} render={() => <Risks traversalId={traversalId} />} />
                 <Route path={`${basePath}/wellbeing`} render={() => <Wellbeing traversalId={traversalId} />} />
+                <Route path={`${basePath}/info`} render={() => <AdditionalInfo traversalId={traversalId} />} />
                 <Route render={() => <Redirect to={`${basePath}/health-age`} />} />
             </Switch>
         </div>
