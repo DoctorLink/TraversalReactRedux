@@ -2,13 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import { Panel, PanelContainer, NavigationButtons } from '../../../Components';
+import { riskConclusionsSelector } from "../../../Selectors/healthAssessment";
 import RiskExplanations from './RiskExplanations';
 import CheckableConclusionsPanel from '../Conclusions/CheckableConclusionsPanel';
 import RiskScores from './RiskScores';
 
-const Risks = ({ traversalId, healthAssessment, conclusions }) => {
-    const { conclusionIds } = healthAssessment;
-
+const Risks = ({ traversalId, riskConclusions }) => {
     return (
         <PoseGroup animateOnMount={true}>
             <PanelContainer key="risk" float="right">
@@ -17,11 +16,11 @@ const Risks = ({ traversalId, healthAssessment, conclusions }) => {
                 </Panel>
             </PanelContainer>
             <PanelContainer key="conclusions">
-                <CheckableConclusionsPanel traversalId={traversalId} checkableConclusions={conclusionIds.riskConclusions} />
+                <CheckableConclusionsPanel traversalId={traversalId} conclusions={riskConclusions} />
             </PanelContainer>
             <PanelContainer key="explanations">
                 <Panel>
-                    <RiskExplanations conclusions={conclusions} />
+                    <RiskExplanations />
                 </Panel>
             </PanelContainer>
             <NavigationButtons
@@ -34,7 +33,6 @@ const Risks = ({ traversalId, healthAssessment, conclusions }) => {
 }
 
 const mapStateToProps = state => ({
-    healthAssessment: state.healthAssessment,
-    conclusions: state.conclusion && state.conclusion.conclusions || []
+    riskConclusions: riskConclusionsSelector(state),
 });
 export default connect(mapStateToProps)(Risks);

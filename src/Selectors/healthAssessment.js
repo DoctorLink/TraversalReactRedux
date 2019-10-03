@@ -1,0 +1,34 @@
+import { createSelector,  } from "reselect";
+import { conclusionsSelector, nonSilentConclusionsSelector } from "./conclusion";
+
+export const healthAssessmentSelector = state => state.healthAssessment;
+
+const conclusionIdsSelector = createSelector(
+    healthAssessmentSelector,
+    hra => hra.conclusionIds
+);
+
+export const riskConclusionsSelector = createSelector(
+    nonSilentConclusionsSelector,
+    conclusionIdsSelector,
+    (conclusions, ids) => conclusions.filter(c => ids.riskConclusions.indexOf(c.assetId) > -1)
+);
+
+export const wellnessConclusionsSelector = createSelector(
+    nonSilentConclusionsSelector,
+    conclusionIdsSelector,
+    (conclusions, ids) => conclusions.filter(c => ids.wellnessConclusions.indexOf(c.assetId) > -1)
+);
+
+export const additionalConclusionsSelector = createSelector(
+    nonSilentConclusionsSelector,
+    riskConclusionsSelector,
+    wellnessConclusionsSelector,
+    (conclusions, riskConclusions, wellnessConclusions) =>
+        conclusions.filter(c => riskConclusions.indexOf(c) === -1 && wellnessConclusions.indexOf(c) === -1)
+);
+
+export const riskExplanationsSelector = createSelector(
+    conclusionsSelector,
+    conclusions => conclusions.filter(c => c.category1 === "Risk Models" && c.category2 === "2")
+);

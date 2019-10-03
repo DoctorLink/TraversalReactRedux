@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from "react-redux";
 import { AccordionHeader, AccordionBody, HealthReportPanelHeader, PanelContent, PanelConclusion } from "../../../Components";
 import { replaceLineBreaks } from "../../../Helpers";
+import { riskExplanationsSelector } from '../../../Selectors/healthAssessment';
 
 const HtmlContent = ({ children = "", element = "div" }) => React.createElement(element, {
     dangerouslySetInnerHTML: { __html: replaceLineBreaks(children) }
@@ -35,18 +37,20 @@ const RiskExplanation = ({ conclusion }) => {
     );
 }
 
-const RiskExplanations = ({ conclusions }) => {
-    const explanations = conclusions.filter(c => c.category1 === "Risk Models" && c.category2 === "2");
+const RiskExplanations = ({ riskExplanations }) => {
     return (
         <>
             <HealthReportPanelHeader>
                 Your risks explained
             </HealthReportPanelHeader>
             <PanelContent>
-                {explanations.map(conc => <RiskExplanation key={conc.assetId} conclusion={conc} />)}
+                {riskExplanations.map(conc => <RiskExplanation key={conc.assetId} conclusion={conc} />)}
             </PanelContent>
         </>
     )
 }
 
-export default RiskExplanations;
+const mapStateToProps = state => ({
+    riskExplanations: riskExplanationsSelector(state)
+});
+export default connect(mapStateToProps)(RiskExplanations);
