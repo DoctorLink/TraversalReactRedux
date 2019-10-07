@@ -34,6 +34,11 @@ export const riskExplanationsSelector = createSelector(
     conclusions => conclusions.filter(c => c.category1 === "Risk Models" && c.category2 === "2")
 );
 
+export const wellnessExplanationsSelector = createSelector(
+    conclusionsSelector,
+    conclusions => conclusions.filter(c => c.category1 === "Wellbeing Models" && c.category2 === "2")
+);
+
 export const myNumbersSelector = createSelector(
     conclusionsSelector,
     conclusions => conclusions.filter(c => c.category1 === "My Numbers").map(parseNumberConclusion)

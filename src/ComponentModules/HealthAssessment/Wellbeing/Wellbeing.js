@@ -2,11 +2,12 @@ import React from 'react'
 import { connect } from "react-redux";
 import { PoseGroup } from 'react-pose';
 import { Panel, PanelContainer } from '../../../Components';
-import { wellnessConclusionsSelector } from "../../../Selectors/healthAssessment";
+import { wellnessConclusionsSelector, wellnessExplanationsSelector } from "../../../Selectors/healthAssessment";
 import CheckableConclusionsPanel from '../Conclusions/CheckableConclusionsPanel';
+import Explanations from '../Conclusions/Explanations';
 import WellbeingScores from "./WellbeingScores";
 
-const Wellbeing = ({ traversalId, wellnessConclusions }) => {
+const Wellbeing = ({ traversalId, wellnessConclusions, wellnessExplanations }) => {
     return (
         <PoseGroup animateOnMount={true}>
             <PanelContainer key="chart" float="right">
@@ -17,11 +18,17 @@ const Wellbeing = ({ traversalId, wellnessConclusions }) => {
             <PanelContainer key="conclusions">
                 <CheckableConclusionsPanel traversalId={traversalId} conclusions={wellnessConclusions} />
             </PanelContainer>
+            <PanelContainer key="explanations">
+                <Panel>
+                    <Explanations title="Your lifestyle scores explained" explanations={wellnessExplanations} />
+                </Panel>
+            </PanelContainer>
         </PoseGroup>
     )
 }
 
 const mapStateToProps = state => ({
-    wellnessConclusions: wellnessConclusionsSelector(state)
+    wellnessConclusions: wellnessConclusionsSelector(state),
+    wellnessExplanations: wellnessExplanationsSelector(state),
 });
 export default connect(mapStateToProps)(Wellbeing);

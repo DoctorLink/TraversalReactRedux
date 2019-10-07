@@ -2,12 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import { Panel, PanelContainer } from '../../../Components';
-import { riskConclusionsSelector } from "../../../Selectors/healthAssessment";
-import RiskExplanations from './RiskExplanations';
+import { riskConclusionsSelector, riskExplanationsSelector } from "../../../Selectors/healthAssessment";
+import Explanations from '../Conclusions/Explanations';
 import CheckableConclusionsPanel from '../Conclusions/CheckableConclusionsPanel';
 import RiskScores from './RiskScores';
 
-const Risks = ({ traversalId, riskConclusions }) => {
+const Risks = ({ traversalId, riskConclusions, riskExplanations }) => {
     return (
         <PoseGroup animateOnMount={true}>
             <PanelContainer key="risk" float="right">
@@ -20,7 +20,7 @@ const Risks = ({ traversalId, riskConclusions }) => {
             </PanelContainer>
             <PanelContainer key="explanations">
                 <Panel>
-                    <RiskExplanations />
+                    <Explanations title="Your risks explained" explanations={riskExplanations} />
                 </Panel>
             </PanelContainer>
         </PoseGroup>
@@ -29,5 +29,6 @@ const Risks = ({ traversalId, riskConclusions }) => {
 
 const mapStateToProps = state => ({
     riskConclusions: riskConclusionsSelector(state),
+    riskExplanations: riskExplanationsSelector(state),
 });
 export default connect(mapStateToProps)(Risks);
