@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
-import { Panel, PanelContainer, NavigationButtons } from '../../../Components';
+import { Panel, PanelContainer } from '../../../Components';
 import { riskConclusionsSelector } from "../../../Selectors/healthAssessment";
 import RiskExplanations from './RiskExplanations';
 import CheckableConclusionsPanel from '../Conclusions/CheckableConclusionsPanel';
@@ -23,11 +23,6 @@ const Risks = ({ traversalId, riskConclusions }) => {
                     <RiskExplanations />
                 </Panel>
             </PanelContainer>
-            <NavigationButtons
-                key="nav"
-                previousRoute={`/traversal/${traversalId}/health-age`}
-                nextRoute={`/traversal/${traversalId}/wellbeing`}
-            />
         </PoseGroup>
     )
 }

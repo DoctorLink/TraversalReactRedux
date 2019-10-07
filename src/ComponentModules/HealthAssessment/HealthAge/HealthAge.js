@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { PoseGroup } from 'react-pose';
 import styled from "styled-components";
-import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, NavigationButtons, PanelConclusion, UpdateWhenVisible } from '../../../Components';
+import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent, PanelBodyText, PanelConclusion, UpdateWhenVisible } from '../../../Components';
 import { riskConclusionsSelector } from "../../../Selectors/healthAssessment";
 import CheckableConclusions from '../Conclusions/CheckableConclusions';
 import { useRiskSummary } from "../Hooks";
@@ -39,7 +39,6 @@ const HealthAge = ({ traversalId, riskConclusions }) => {
                     </PanelContent>
                 </Panel>
             </PanelContainer>
-            <NavigationButtons key="nav" nextRoute={`/traversal/${traversalId}/risks`} />
         </PoseGroup>
     )
 }

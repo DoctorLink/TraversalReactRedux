@@ -26,6 +26,7 @@ export { default as TextField } from './TextField'
 export { default as Title } from './Title'
 export { Dropdown, InlineDropdown } from './Dropdown'
 export { default as NavigationButtons } from './NavigationButtons'
+export { default as CarouselNavigation } from './CarouselNavigation'
 
 export { AccordionHeader, AccordionBody } from './Accordion'
 
