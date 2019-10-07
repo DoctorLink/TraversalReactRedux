@@ -8,6 +8,7 @@ import colors from '../../Theme/base/colors'
 import Risks from './Risks/Risks';
 import HealthAge from './HealthAge/HealthAge';
 import Wellbeing from './Wellbeing/Wellbeing';
+import MyNumbers from './MyNumbers/MyNumbers';
 import AdditionalInfo from './AdditionalInfo/AdditionalInfo';
 
 const bottomBarHeight = "100px";
@@ -40,7 +41,8 @@ const HealthAssessment = ({ traversalId, dispatch }) => {
                     <Route path={`${basePath}/health-age`} render={() => <HealthAge traversalId={traversalId} />} />
                     <Route path={`${basePath}/risks`} render={() => <Risks traversalId={traversalId} />} />
                     <Route path={`${basePath}/wellbeing`} render={() => <Wellbeing traversalId={traversalId} />} />
-                    <Route path={`${basePath}/info`} render={() => <AdditionalInfo traversalId={traversalId} />} />
+                    <Route path={`${basePath}/my-numbers`} component={MyNumbers} />
+                    <Route path={`${basePath}/info`} component={AdditionalInfo} />
                     <Route render={() => <Redirect to={`${basePath}/health-age`} />} />
                 </Switch>
             </Content>
@@ -50,6 +52,7 @@ const HealthAssessment = ({ traversalId, dispatch }) => {
                         `${basePath}/health-age`,
                         `${basePath}/risks`,
                         `${basePath}/wellbeing`,
+                        `${basePath}/my-numbers`,
                         `${basePath}/info`
                     ]}
                 />

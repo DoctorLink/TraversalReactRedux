@@ -5,7 +5,7 @@ import { Panel, PanelContainer, HealthReportPanelHeader, PanelContent } from '..
 import { additionalConclusionsSelector } from "../../../Selectors/healthAssessment";
 import NonCheckableConclusions from "../Conclusions/NonCheckableConclusions";
 
-const AdditionalInfo = ({ traversalId, additionalConclusions }) => {
+const AdditionalInfo = ({ additionalConclusions }) => {
     return (
         <PoseGroup animateOnMount={true}>
             <PanelContainer key="conclusions">

@@ -1,5 +1,6 @@
 import { createSelector,  } from "reselect";
 import { conclusionsSelector, nonSilentConclusionsSelector } from "./conclusion";
+import { parseNumberConclusion } from "./parseNumberConclusion";
 
 export const healthAssessmentSelector = state => state.healthAssessment;
 
@@ -31,4 +32,9 @@ export const additionalConclusionsSelector = createSelector(
 export const riskExplanationsSelector = createSelector(
     conclusionsSelector,
     conclusions => conclusions.filter(c => c.category1 === "Risk Models" && c.category2 === "2")
+);
+
+export const myNumbersSelector = createSelector(
+    conclusionsSelector,
+    conclusions => conclusions.filter(c => c.category1 === "My Numbers").map(parseNumberConclusion)
 );

@@ -9,3 +9,9 @@ export const Conclusion = styled.div`
 export const ConclusionContent = styled.div`
     padding: ${theme.spacing.padding}px;
 `
+
+export const NumberConclusionContent = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+`
