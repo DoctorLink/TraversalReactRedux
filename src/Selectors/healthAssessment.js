@@ -1,6 +1,7 @@
-import { createSelector,  } from "reselect";
+import { createSelector, } from "reselect";
 import { conclusionsSelector, nonSilentConclusionsSelector } from "./conclusion";
 import { parseNumberConclusion } from "./parseNumberConclusion";
+import { XmlRules } from "./XmlRules";
 
 export const healthAssessmentSelector = state => state.healthAssessment;
 
@@ -42,4 +43,27 @@ export const wellnessExplanationsSelector = createSelector(
 export const myNumbersSelector = createSelector(
     conclusionsSelector,
     conclusions => conclusions.filter(c => c.category1 === "My Numbers").map(parseNumberConclusion)
+);
+
+const healthAgeRulesSelector = createSelector(
+    conclusionsSelector,
+    conclusions => {
+        const conclusion = conclusions.find(c => c.category1 === "Health Age");
+        if (!conclusion) return null;
+        return new XmlRules(conclusion.moreDetail);
+    }
+);
+
+const healthAgeDiffSelector = createSelector(
+    healthAssessmentSelector,
+    healthAssessment => {
+        const { age, healthAge } = healthAssessment.riskSummary;
+        return healthAge - age;
+    }
+);
+
+export const healthAgeExplanationSelector = createSelector(
+    healthAgeRulesSelector,
+    healthAgeDiffSelector,
+    (rules, healthAgeDiff) => rules && rules.getRuleValue(healthAgeDiff)
 );

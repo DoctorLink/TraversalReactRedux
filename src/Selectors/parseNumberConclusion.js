@@ -1,9 +1,9 @@
-const parser = new DOMParser();
+import { XmlRules } from "./XmlRules";
 
 export function parseNumberConclusion(conclusion) {
-    const numbersXml = parser.parseFromString(conclusion.moreDetail, "text/xml").documentElement;
+    const xmlRules = new XmlRules(conclusion.moreDetail);
     return {
         ...conclusion,
-        value: numbersXml.getAttribute("value") || "?"
+        value: xmlRules.value || "?"
     };
 }
