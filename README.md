@@ -74,8 +74,8 @@ yarn watch
 If you get an error about duplicate versions of react and/or react-dom (["Hooks can only be called inside the body of a function component"](https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react)), try pointing this library to the versions used by your app:
 
 ```bash
-yarn link ../TraversalEngineApi/services/client/node_modules/react
-yarn link ../TraversalEngineApi/services/client/node_modules/react-dom
+yarn link ../TraversalEngineAPI/services/client/node_modules/react
+yarn link ../TraversalEngineAPI/services/client/node_modules/react-dom
 ```
 
 Note that react and react-dom are required both as `peerDependencies` and `devDependencies`; the latter is because they are required by the unit tests.
