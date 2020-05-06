@@ -35,5 +35,5 @@ steps:
       displayName: 'git setup'
 
     - script: |
-          np $(version) --tag $(tag) --no-tests
+          np $(version) --tag $(tag)
       displayName: 'Run np'
