@@ -5,6 +5,7 @@ import { traversalRootReducersMapObject } from '../src/Reducers';
 import { combineReducers } from 'redux';
 import { renderWithRedux } from './utils';
 import HealthAge from '../src/Containers/HealthAssessment/HealthAge/HealthAge';
+import 'jest-styled-components';
 
 describe('HealthAge component', () => {
   const state = {
@@ -49,10 +50,10 @@ describe('HealthAge component', () => {
     const result = renderComponent();
 
     expect(result.getByText(/Your health age is/).textContent).toBe(
-      'Your health age is 35'
+      'Your health age is'
     );
     expect(result.getByText(/But you could be/).textContent).toBe(
-      'But you could be up to 5 years younger by making the below changes'
+      'But you could be up to 5 years younger'
     );
   });
 
@@ -65,5 +66,45 @@ describe('HealthAge component', () => {
       result.queryByText('Your Mediterranean Diet Rating is 50 out of 100')
     ).toBeNull();
     expect(result.queryByText('Stop smoking')).not.toBeNull();
+  });
+
+  test('should display 5 ages ', () => {
+    const result = renderComponent();
+    const ageDivs = result.getAllByRole('article');
+    expect(ageDivs.length).toBe(5);
+  });
+
+  test('should display 2 ages before and after health age', () => {
+    const age = 35;
+    const result = renderComponent();
+    const ageDivs = result.getAllByRole('article');
+    for (let i = age - 2, j = 0; i < age + 3; i++, j++) {
+      expect(ageDivs[j].textContent).toBe(i.toString());
+    }
+  });
+
+  test('should display 2 ages before and after health age', () => {
+    const age = 35;
+    const result = renderComponent();
+    const ageDivs = result.getAllByRole('article');
+    for (let i = age - 2, j = 0; i < age + 3; i++, j++) {
+      expect(ageDivs[j].textContent).toBe(i.toString());
+    }
+  });
+
+  test('should hightlight current health age', () => {
+    const result = renderComponent();
+    const ageDivs = result.getAllByRole('article');
+    expect(ageDivs[2]).not.toHaveStyleRule('opacity: 0.2;');
+  });
+
+  test('should fade other ages next to current health age', () => {
+    const result = renderComponent();
+    const ageDivs = result.getAllByRole('article');
+    const opacity = 'opacity: 0.2;';
+    expect(ageDivs[0]).toHaveStyleRule(opacity);
+    expect(ageDivs[1]).toHaveStyleRule(opacity);
+    expect(ageDivs[3]).toHaveStyleRule(opacity);
+    expect(ageDivs[4]).toHaveStyleRule(opacity);
   });
 });

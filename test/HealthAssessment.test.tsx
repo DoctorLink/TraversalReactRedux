@@ -56,7 +56,7 @@ describe('HealthAssessment root component', () => {
     store.dispatch(healthAgeGetResponse({ healthAge: 40 } as HealthAgeModel));
 
     expect(history.location.pathname).toBe('/traversal/abc/health-age');
-    expect(component.getByText('Your health age report')).toBeInTheDocument();
+    expect(component.getByText('Your health age is')).toBeInTheDocument();
   });
 
   test('Zero health age, non-empty risks loaded: redirects to risks page', () => {
