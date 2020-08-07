@@ -18,6 +18,9 @@ ConclusionsTitle.defaultProps = {
 
 const Centered = styled(PanelBodyText)`
   text-align: center;
+  @media screen and (max-width: 355px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const CheckableConclusionHeader: FC = () => {
