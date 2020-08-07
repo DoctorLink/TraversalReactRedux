@@ -15,9 +15,9 @@ export function getPointerPosition(
         Math.floor(
           Math.min(Math.max((healthAge - age) / maxSwing, 0), 1) * middle
         ),
-      98.5
+      98.4
     ),
-    1.5
+    1.6
   );
   return position;
 }
