@@ -83,15 +83,6 @@ describe('HealthAge component', () => {
     }
   });
 
-  test('should display 2 ages before and after health age', () => {
-    const age = 35;
-    const result = renderComponent();
-    const ageDivs = result.getAllByRole('article');
-    for (let i = age - 2, j = 0; i < age + 3; i++, j++) {
-      expect(ageDivs[j].textContent).toBe(i.toString());
-    }
-  });
-
   test('should hightlight current health age', () => {
     const result = renderComponent();
     const ageDivs = result.getAllByRole('article');
