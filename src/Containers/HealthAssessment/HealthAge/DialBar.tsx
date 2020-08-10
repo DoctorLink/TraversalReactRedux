@@ -38,7 +38,7 @@ const RightText = styled(Text)`
 const DialBar: React.FC = () => {
   return (
     <Rectangle>
-      <LeftText>Unhealthy </LeftText>
+      <LeftText>Unhealthy</LeftText>
       <RightText>Healthy</RightText>
     </Rectangle>
   );

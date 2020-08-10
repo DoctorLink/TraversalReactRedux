@@ -5,15 +5,20 @@ import { DialBar } from './DialBar';
 import styled from 'styled-components';
 
 const width = 100;
-const height = 5;
+const height = 6.2;
 const barHeight = 2;
 const centre = { x: 50, y: 50 };
 const pointerWidth = 3;
 const pointerHeight = 3;
 
 const SvgBox = styled.div`
-  padding-top: 20px;
+  padding-top: 10px;
 `;
+
+const StyledSvg = styled.svg`
+  margin-bottom: -2px;
+`;
+
 const HealthAgeDial: React.FC<{
   age: any;
   healthAge: any;
@@ -22,7 +27,7 @@ const HealthAgeDial: React.FC<{
   const position = getPointerPosition(age, healthAge, minimumHealthAge);
   return (
     <SvgBox>
-      <svg viewBox={[0, 0, width, height].toString()}>
+      <StyledSvg viewBox={[0, 0, width, height].toString()}>
         <DialPointer
           cx={centre.x}
           cy={centre.y}
@@ -32,7 +37,7 @@ const HealthAgeDial: React.FC<{
           boxHeight={height}
           barHeight={barHeight}
         />
-      </svg>
+      </StyledSvg>
       <DialBar />
     </SvgBox>
   );

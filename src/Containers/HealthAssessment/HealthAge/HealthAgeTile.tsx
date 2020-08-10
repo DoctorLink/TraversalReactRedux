@@ -25,6 +25,7 @@ const Age = styled.article<TileProps>`
       ${p => 4 - p.heat / 2}rem
     );
   }
+  font-weight: 300;
 `;
 
 const FadedAge = styled(Age)`
