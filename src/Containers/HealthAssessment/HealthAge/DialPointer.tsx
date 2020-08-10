@@ -25,6 +25,8 @@ const StyledPolygon = styled.polygon<StyledPolygonProps>`
   transform-origin: ${p => p.cx}px ${p => p.cy}px;
   transition: transform 0.5s;
   stroke-linejoin: round;
+  stroke: #000;
+  stroke-width: 0.4;
 `;
 
 const DialPointer: React.FC<{

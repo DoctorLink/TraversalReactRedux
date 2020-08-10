@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import colors from '../../../Theme/base/colors';
 
 const Rectangle = styled.div`
   height: 24px;
   width: 100%;
   background: linear-gradient(
     270deg,
-    #24a31b 0%,
-    #b6ef17 25%,
-    #ffcc00 50%,
-    #ff6400 75%,
-    #e50707 100%
+    ${colors.green100} 0%,
+    ${colors.greenyellow} 25%,
+    ${colors.orange200} 50%,
+    ${colors.redgreen} 75%,
+    ${colors.red300} 100%
   );
   display: flex;
   flex-direction: row;
@@ -22,7 +23,7 @@ const Rectangle = styled.div`
 
 const Text = styled.div`
   font-size: 0.75rem;
-  color: #ffffff;
+  color: ${colors.white};
   align-self: center;
 `;
 
@@ -37,7 +38,7 @@ const RightText = styled(Text)`
 const DialBar: React.FC = () => {
   return (
     <Rectangle>
-      <LeftText>Unhealthy </LeftText>
+      <LeftText>Unhealthy</LeftText>
       <RightText>Healthy</RightText>
     </Rectangle>
   );

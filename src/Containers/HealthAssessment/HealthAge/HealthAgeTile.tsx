@@ -11,11 +11,21 @@ const Tiles = styled.section`
   align-items: center;
 `;
 const Age = styled.article<TileProps>`
-  font-size: clamp(
-    ${p => 3 - p.heat / 2}rem,
-    ${p => 3 - p.heat / 2 + 0.5}vw,
-    ${p => 4 - p.heat / 2}rem
-  );
+  @media screen and (max-width: 355px) {
+    font-size: clamp(
+      ${p => 2 - p.heat / 2 + 0.4}rem,
+      ${p => 2 - p.heat / 2 + 0.5}vw,
+      ${p => 3 - p.heat / 2}rem
+    );
+  }
+  @media screen and (min-width: 356px) {
+    font-size: clamp(
+      ${p => 3 - p.heat / 2}rem,
+      ${p => 3 - p.heat / 2 + 0.5}vw,
+      ${p => 4 - p.heat / 2}rem
+    );
+  }
+  font-weight: 300;
 `;
 
 const FadedAge = styled(Age)`
